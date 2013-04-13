@@ -1,0 +1,224 @@
+# vim:ts=4:syntax=sh
+
+#echo bashrc
+# if we've already run bashrc, don't do it again!	see res alias below.
+if [ ! -z "$bashrc_did_run" ]; then
+	return
+fi
+
+VEGGIE_HOME="$HOME/.veggieshell"
+export VEGGIE_HOME
+
+# first, source system stuff, it's sometimes useful
+if [ -e /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# set this now, so that prePATH and such work on rsh and non-interactive shells
+shopt -s expand_aliases
+
+# set the machine arch - needed for cygwin's annoying c:\ stuff
+. "$VEGGIE_HOME/shells/set-arch.sh"
+
+# this is a very useful little function.  run it now, since we use it now.
+. "$VEGGIE_HOME/shells/functions/paths.sh"
+
+# some systems (osx/redhat) do not define MANPATH and let man itself have
+# defaults.  but, when we append MANPATH, man only reads $MANPATH and
+# ignores the implicit defaults.  dumb.  so, save the trouble and set an
+# initial path.
+if [ -z "$MANPATH" ]; then
+	if [ -d /usr/man ]; then
+		postMAN /usr/man
+	fi
+	if [ -d /usr/share/man ]; then
+		postMAN /usr/share/man
+	fi
+	if [ -d /man ]; then
+		postMAN /man
+	fi
+fi
+
+# save the original path.	the res alias will re-read the bashrc.	but,
+# the path can get expanded to huge lengths causing errors, so save orig!
+originalpath="$PATH"
+originalmanpath="$MANPATH"
+bashrc_did_run=1
+alias res='unset bashrc_did_run; export PATH="$originalpath" MANPATH="$originalmanpath"; source "$HOME"/.bashrc'
+
+# add /ulb to path, since init scripts may need it.
+prePATH /usr/local/bin
+
+# add $conf's script dir
+if [ -d "$VEGGIE_HOME/scripts" ]; then
+	#prePATH `cyg_path_munge "$VEGGIE_HOME/scripts"`
+	#prePATH "$VEGGIE_HOME/scripts"
+	#PATH="`cyg_path_munge "$VEGGIE_HOME/scripts"`:$PATH"
+	PATH="$VEGGIE_HOME/scripts:$PATH"
+fi
+# add your personal binaries and scripts to your path, at the very beginning
+if [ -d "$VEGGIE_HOME/$VEGGIE_ARCH/bin" ]; then
+	#prePATH "$VEGGIE_HOME/$VEGGIE_ARCH/bin"
+	#PATH="`cyg_path_munge "$VEGGIE_HOME/$VEGGIE_ARCH/bin"`:$PATH"
+	PATH="$VEGGIE_HOME/$VEGGIE_ARCH/bin:$PATH"
+fi
+
+# Source various files, set the order in the sourcefiles variable if needed.
+for i in "$VEGGIE_HOME"/shells/functions/*.sh; do
+	if [ -f "$i" ]; then
+		. "$i"
+	fi
+done
+unset sourcefiles
+
+postPATH /sbin /usr/sbin
+postMAN /usr/local/man
+
+if [ "$VEGGIE_ARCH" = "sun" ]; then
+	postPATH /opt/SUNWspro/bin /usr/ccs/bin /usr/openwin/bin
+	postMAN /usr/dt/man /usr/openwin/man /opt/SUNWspro/man
+elif [ "$VEGGIE_ARCH" = "osx" ]; then
+	postPATH /usr/X11R6/bin
+	if [ -d "/sw/bin" ]; then
+		# fink
+		prePATH /sw/bin	
+		. /sw/bin/init.sh
+	fi
+	if [ -d "/opt/local/bin" ]; then
+		# DarwinPorts or MacPorts
+		prePATH /opt/local/bin
+		preMAN /opt/local/man
+	fi
+fi
+
+
+# we are coders, we wants cores
+#ulimit -HSc unlimited
+
+# unset auto-logout and all limits
+unset TMOUT
+ulimit -t unlimited
+
+# default xterm-ish program, override in personal/shell/vars
+myxterm="rxvt"
+
+# default PS1 prompt, override in personal/shell/vars
+PS1='[\u@\h \W]\$ '
+
+
+# not all hostname programs are created equal,
+# some return FQDN, others just hostname
+hostname=`hostname | cut -d. -f 1`
+
+if [ "$VEGGIE_ARCH" = "osx" ]; then
+	netname=`domainname 2> /dev/null`
+else
+	# FIXME fix this....
+	netname=`dnsdomainname 2> /dev/null`
+	res=$?
+fi
+
+myuser=`who am i  | cut -d' ' -f1 | cut -d'!' -f2`
+if [ "$VEGGIE_ARCH" = "osx" ]; then
+	# FIXME: who -m ==> jay ttyp4 May 9 21:15 (localhost)
+	#fromhost=`who -m | cut -f6`
+	fromhost=`who -m | awk '{print $6}'`
+	if [ -z "$fromhost" ]; then
+		fromhost=localhost
+		fromfqdn=localhost
+	else
+		fromhost=`who -m | cut -d\( -f2 | cut -d. -f1 | cut -d\) -f1`
+		fromfqdn=`who -m | cut -d\( -f2 | cut -d\) -f1`
+	fi
+else
+	# FIXME
+	# WAS: who -ml ==> blahost!jay  pts/0  May  9 21:15 (localhost.localdomain)
+	# CHANGED: who -ml ==> -l is deprecated; plus format changed!
+	#			jay      pts/0        May 31 20:46 (192.168.1.102)
+	# this doesn't work if there is no name, just IP!  ARGH!
+	fromhost=`who -m --lookup | cut -d\( -f2 | cut -d. -f1`
+	fromfqdn=`who -m --lookup | cut -d\( -f2 | cut -d\) -f1`
+fi
+
+# sometimes, the display var gets mucked up, especially when there is
+# no DNS.  so, this sets 
+#	DISPLAY=hostname:0.0	to :0
+#	fromhost=localhost	to :0
+#	blank DISPLAY		to fromhost:0
+if [ 0 ]; then
+# FIXME **DISABLE THIS**  problem with vi and remote DISPLAY!!
+mydisp=`echo $DISPLAY | cut -d: -f 1`
+if [ "$mydisp" = "$hostname" ]; then
+	# the d0 command is defined in x-stuff.sh
+	d0
+elif [ "$fromhost" = localhost ]; then
+	d0
+elif [ "$DISPLAY" = "" ]; then
+	# this has the side effect of setting blank fromfqdn to :0, good.
+	export DISPLAY="$fromfqdn:0"
+fi
+unset mydisp
+fi
+unset DISPLAY ;# FIXME WHY DOES IT NOT WORK?  SCREW IT FOR NOW
+#
+# set some fun behaviour
+#
+
+# newer redhat's have the "feature" of doing case insensitive sorts when
+# you use ls.  take about annoying, now Makefile and CVS and README.html
+# are buried in the middle of your files.  this (i hope) shuts that off.
+# TODO does not appear to work 
+shopt -u nocaseglob
+
+# another "feature" of redhat is to kill all background jobs when you
+# exit the shell (or kill the xterm).  what bash is doing is sending a
+# hup, for most things, is a death knoll.  this shuts (i hope again)
+# that off too. TODO test me more!
+shopt -u huponexit
+
+# this allows 'cd ORACLE_HOME' to work like 'cd $ORACLE_HOME'.  also try
+# apa=/usr/local/apache-1.3.19 followed with cd apa , etc...
+shopt -s cdable_vars
+
+# this is dangerous - shut off.  "source file.sh" will search PATH for
+# file.sh.  if you're sourcing something, know where it is, use ./file.sh
+shopt -u sourcepath
+
+# correct minor spelling errors when doing "cd directoyr_name" (fixes y|r)
+shopt -s cdspell
+
+# this makes multi-line command lines become one line when hitting the
+# up arrow.  nice for if[..];then and cvs commit -m 'blah\nblah\n'
+# crtl J means a newline in the output, fyi.
+command_oriented_history=1
+
+# now, load up personal config files.  we load up shell/env vars first, then
+# command line completion macros, and finally aliases.  for each grouping, we
+# first load the system files which come with this toolkit.  next, we load a
+# your personal configs.  then, we load a custom config for the network which
+# you are using.  finally, we load up a config for this exact host.
+
+# load up shell/env vars; then command line completions; then aliases
+for i in \
+		"$VEGGIE_HOME/shells/vars" \
+		"$VEGGIE_HOME/personal/shells/vars" \
+		"$VEGGIE_HOME/personal/shells/networks/$netname-vars" \
+		"$VEGGIE_HOME/personal/shells/hosts/$hostname-vars" \
+		\
+		"$VEGGIE_HOME/shells/completions" \
+		"$VEGGIE_HOME/personal/shells/completions" \
+		"$VEGGIE_HOME/personal/shells/networks/$netname-completions" \
+		"$VEGGIE_HOME/personal/shells/hosts/$hostname-completions" \
+		\
+		"$VEGGIE_HOME/shells/alias" \
+		"$VEGGIE_HOME/personal/shells/alias" \
+		"$VEGGIE_HOME/personal/shells/networks/$netname-alias" \
+		"$VEGGIE_HOME/personal/shells/hosts/$hostname-alias" \
+		\
+		"$VEGGIE_HOME/shells/functions/arch-$VEGGIE_ARCH" \
+		"$VEGGIE_HOME/personal/shells/functions/arch-$VEGGIE_ARCH" \
+	; do
+	if [ -f "$i" ]; then
+		. "$i"
+	fi
+done

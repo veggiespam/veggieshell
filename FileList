@@ -1,0 +1,13 @@
+# vim:ts=25
+# This is a list of files which need to be symlinked into
+# the home directory.  There can be *NO* blank lines in this file.
+# 
+# ~home/.rcfile (tab)	actual file
+.vimrc	editors/vimrc
+.exrc	editors/exrc
+.bash_logout	shells/bash_logout
+.bash_login	shells/bash_login
+.bashrc	shells/bashrc
+.inputrc	utils/inputrc
+.lesskey	utils/lesskey
+.Xdefaults	x-stuff/Xdefaults

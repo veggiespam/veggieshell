@@ -1,0 +1,23 @@
+# run this command to build lesskey itself:
+#	lesskey -o lesskey lesskey-generator
+# in the dir with this file.
+
+#command
+# these two map BS and DEL to back page, like gnu-info, IE, emacs...
+\008	back-scroll
+\177	back-scroll
+
+# sometimes, the arrows don't work on all terms.
+\e[A	back-line
+\e[B	forw-line
+
+# FIXME: set two commands which toggle tabstop from 8 to 4 and back
+#\010	toggle-option x 4
+\010	toggle-option x 8
+
+#line-edit
+
+#env
+
+
+# vim:ts=12:sts=12

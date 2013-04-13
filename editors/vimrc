@@ -1,0 +1,226 @@
+" vim:ts=4:sts=4
+
+" start with a bunch of basic things
+set backspace=2		" 2: you can backspace over eol and start of insert
+set ruler			" shows current cursor position
+set showcmd			" this shows the command 'stack' like emacs does
+set noshowmode		" don't print INSERT or OVERWRITE
+set nobackup		" don't create backup files
+set tabstop=4		" duh
+set softtabstop=4	" when hit tab, it means this many spaces-same as tabstop
+set shiftwidth=4	" our indent size.  same as tabstop
+set showmatch		" when typing ) ] }, this will show the matching ( [ {
+set nowriteany		" overrides dangerous non-required ! in :w! commands
+set ignorecase		" ignore the case of searches
+set hlsearch		" highlight all matches on a search
+set incsearch		" show matches halfway typing a pattern
+set wrap			" word wrap and not horizontal scroll
+set scrolloff=3		" keep 3 lines visible at bottom
+set splitbelow		" when splitting screen, do it below current window
+set visualbell		" don't beep, blink (no work on osx term)
+set viminfo='20,\"50	" viminfo stores marks, cursor pos, etc history
+set whichwrap+=<,>,[,]	" <Left> and <Right> wrap around line breaks
+set wildignore+=*.swp,*.swo,*.bak,*~,*.o,*.dbg	" ignore dumb files
+set tags=./tags,../tags,../tags					" set initial ctags search path
+set modelines=5		" num lines of file to check for vim:... commands
+set history=50		" number of : or / cmd lines to remember
+set showfulltag		" when doing tag match, show f'n prototype (TESTME)
+
+set ttyfast			" vim writes screen faster always, not just xterm/rxvt/etc
+
+set laststatus=1	" give me a status line only when there are 2+ windows
+
+" delete != backspace  ?????
+map!  
+
+:syntax on
+
+" programming options
+set autoindent		" indent to previous line's indention
+set nosmartindent	" use cindent instead
+set cindent			" enables c-style indents on { and }
+
+" vim 5.8 defaults
+"set cinoptions=">1s,e0,n0,f0,{0,}0,^0,:1s,=1s,g1s,h1s,p1s,t0,+1s,c1s,(0,)20,*40"
+
+"vim 6.0-6.3 defaults
+"set cinoptions=">s,e0,n0,f0,{0,}0,^0,:s,=s,l0,gs,hs,ps,ts,+s,c3,C0,(2s,us,\U0,w0,m0,j0,)20,*30
+
+"vim 7.0 defaults
+"set cinoptions=>s,e0,n0,f0,{0,}0,^0,:s,=s,l0,b0,gs,hs,ps,ts,is,+s,c3,C0,/0,(2s,us,U0,w0,W0,m0,j0,)20,*30
+
+set cinoptions+=t0,c1s,C1s,(0,l1,j1
+
+" default:  cinkeys="0{,0},:,0#,!^F,o,O,e"
+set cinkeys-=0#			" turn off #ifdef non-indents
+"set cinkeys+=!<Tab>		" do a re-indent when press <Tab> (^F is default)
+
+" shuts off the forcing of #ifdefs into column 1.
+inoremap # X#
+
+" for text files, set a margin
+autocmd BufRead		*.txt set tw=72	
+autocmd BufNewFile	*.txt set tw=72
+
+" chmod +x shell and perl programs - FIXME
+"autocmd BufWritePost   *.sh             !chmod ugo+x %
+"autocmd BufWritePost   *.pl             !chmod ugo+x %
+
+" key remaps
+inoremap <C-a> <Home>	" increment is useless, make ^A like shell line
+inoremap <C-e> <End>	" ^E moves screen like 100 other commands, change it
+"does not work.... FIXME maybe
+nnoremap Q gq		"remap Q command like vim4.0: reformat text
+"does not work.... FIXME maybe
+vnoremap Q gq		"remap Q command like vim4.0: reformat text
+nmap :W :w			" how often to do you type :W and mean :w
+
+syntax on
+
+" by default, we assume we have a dark (near black) background
+let background="dark"
+
+if version >= 700 
+	" underline the status line and mode indicator in insert mode
+	" from http://www.vim.org/tips/tip.php?tip_id=1287 
+	au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta 
+	au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse 
+	"requires set showmode (by default, i shut it off)
+    au InsertLeave * hi ModeMsg ctermfg=black ctermbg=yellow gui=undercurl guisp=Magenta 
+    au InsertEnter * hi ModeMsg ctermfg=white ctermbg=none 
+
+	" highlights the current line you're editing   (laststatus must be 1 or 2)
+	" from http://www.vim.org/tips/tip.php?tip_id=1293 
+	autocmd WinLeave * setlocal nocursorline " nocursorcolumn
+	autocmd WinEnter * setlocal cursorline " cursorcolumn
+	autocmd BufLeave * setlocal nocursorline " nocursorcolumn 
+	autocmd BufEnter * setlocal cursorline " cursorcolumn
+
+	if has("gui_running")
+		" set up screen tabs, like in Safari and Firefox
+		" so commandkey+1-9 switches tabs, commandkey+t opens a new tab,
+		" commandkey+w closes the current tab etc..
+		"  FIXME - THIS WORKS ONLY ON A MAC --- D== command.
+		" from http://www.vim.org/tips/tip.php?tip_id=1295
+		map <D-1> 1gt 
+		map <D-2> 2gt 
+		map <D-3> 3gt 
+		map <D-4> 4gt 
+		map <D-5> 5gt 
+		map <D-6> 6gt 
+		map <D-7> 7gt 
+		map <D-8> 8gt 
+		map <D-9> 9gt 
+		map <D-t> :tabnew<CR> 
+		map <D-w> :tabclose<CR>
+		" to map cmd+[ and ] to prev/next tabs
+		map <D-[> gT 
+		map <D-]> gt 
+	endif
+endif 
+
+" :help E436   -- to see terminal options
+
+"if (0) " for now, just turn all this off.  it appears to work again.
+
+" if &term=="xterm"
+" 	set t_Co=8
+"endif
+
+if has("terminfo")
+"if (1)
+	" here, we should determin number of colours.  for now,
+	" just set to 16, since my terms all support that.
+	set t_Co=16
+
+	if &t_Co >= 8
+		" ansi colours
+		set t_AB=[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
+		set t_AF=[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
+	else
+		" normal termcap colors
+		echo &t_Co
+		set t_Sf=[3%p1%dm
+		set t_Sb=[4%p1%dm
+	endif
+else
+	"set t_Sf=[3%dm
+	"set t_Sb=[4%dm
+
+	" these next four die in TERM=cygwin
+	" must manually set TERM=vt100 to use them; setting to xterm broken too
+	" heck, i forget what they do.
+	"set t_Sf=[3%p1%dm
+	"set t_Sb=[4%p1%dm
+	"set t_AB=[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
+	"set t_AF=[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
+endif
+
+"endif " end if 0
+
+
+if has("gui_running")
+	set guifont=6x13
+	" black on white sucks, so change the colour to something fancy
+	highlight Normal guibg=black guifg=grey90
+
+	" change File:Print menu
+	amenu File.Print :w !lpr -h
+	vmenu File.Print :w !lpr -h
+
+	" FIXME these don't work....  how...?
+	menu Edit.Wrap-off :set nowrap <CR> :set guioptions+=b<CR>
+	menu Edit.Wrap-on  :set   wrap <CR> :set guioptions-=b<CR>
+
+	" combining on one line (like +=gbr) doesn't work for all vim versions
+	" g)reyed_menu_item b)ottom_scollbar r)ight_scrollbar
+	set guioptions+=g
+	set guioptions+=b
+	set guioptions+=r
+	" T)oolbar_is_useless t)earoff_menus_are_useless l)eft_scrollbar 
+	set guioptions-=l
+	set guioptions-=t
+	set guioptions-=T
+	" a&A copy the selection to the system clipboard
+	set guioptions+=Aa
+endif
+
+"highlight Comment guifg=green ctermfg=darkred
+
+" set some C programming options 
+"let c_space_errors=1
+"let c_no_trail_space_errors=1	" this gets annoying, so shut off
+"let c_no_tab_space_errors=1	" this gets annoying, so shut off
+let c_minlines=150				" we have big #if 0 areas
+let c_comment_strings=1
+" the next two we should put in somesort of filetype operation
+" we wish : syn keyword cType   end="_t"
+syn keyword cTodo   contained @@@ 
+
+
+" html options
+let html_wrong_comments=1		" do i want this??
+" does minlines work for all file types?
+syn sync minlines=150			" big css/javascript loose highlighting
+
+
+" useful dumb macros
+iab Yalpha	abcdefghijklmnopqrstuvwxyz
+iab YALPHA	ABCDEFGHIJKLMNOPQRSTUVWXYZ
+iab Y09		0123456789
+iab Yruler	12345678901234567890123456789012345678901234567890123456789012345678901234567890
+
+" common typo mini-spell checker
+iab teh the
+
+" now source your personal stuff
+let tmp_var = $VEGGIE_HOME . "/personal/editors/vimrc"
+if filereadable(tmp_var)
+	source $VEGGIE_HOME/personal/editors/vimrc
+endif
+unlet tmp_var
+
+
+" TODO Things to look up:
+" copyindent & preserveindent
+

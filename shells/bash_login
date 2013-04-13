@@ -1,0 +1,4 @@
+# vim:ts=4
+
+#echo bash_login
+. "$HOME/.bashrc"

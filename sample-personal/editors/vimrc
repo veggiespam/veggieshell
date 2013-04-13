@@ -1,0 +1,10 @@
+" vim:ts=4
+
+" in this file, place your personal defaults or system overrides.
+" some common choices:
+
+if has("gui_running")
+	"set guifont=6x13
+	"set guioptions-=b
+endif
+

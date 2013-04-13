@@ -1,0 +1,12 @@
+# vim:ts=4:syntax=conf
+#
+# This file contain all your personal hostnames that you like to go to
+# on the command line.  This is used by bash to do "telnet <tab>"
+# (bash2.05+) or "mail person@<tab>" (bash2.00+) sorts of things.
+# Make this file look like /etc/hosts (which is read first).  This
+# file overrides all host an network specific hostname <tab> things.
+#
+
+# format:
+#ip-address host-name host-name.domain.com funky-alias-for-host
+

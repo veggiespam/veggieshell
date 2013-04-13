@@ -1,0 +1,6 @@
+# Veggieshell version.  
+#
+# It is back to beta for 3.0 release.
+#       
+VEGGIE_VERSION='2.9.0'
+VEGGIE_DATE='2013-04-01'

@@ -1,0 +1,189 @@
+# 
+# GNS ls color configuration
+#
+# Many extensions are in this file; it is not inclusive; it is what we
+# encounter most.  Since this file is parsed once to create an ENV
+# var, it can be verbose.  But, let's not include all extensions since
+# ls will need to read the var.  So, I've listed other possibly useful
+# ones if you want to customize.  In addition, I mention "dead"
+# extensions that you could use if you're, ugh, still using those
+# items.
+
+# Below, there should be one TERM entry for each termtype that is colorizable
+# (these are the dircolors --print-database ones)
+TERM linux
+TERM console
+TERM xterm
+TERM xterm-color
+TERM rxvt
+TERM screen
+TERM screen-w
+TERM vt100
+
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+# Attribute codes: 
+# 00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+# 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+
+NORMAL	00	# global default, although everything should be something.
+FILE	00 	# normal file
+DIR	01;34 	# directory
+LINK	01;36 	# symbolic link
+FIFO	00;40;33	# pipe
+SOCK	01;35	# socket
+DOOR	01;35	# door (Solaris only)
+BLK	01;33	# block device driver
+CHR	01;33 	# character device driver
+ORPHAN	01;05;37;41 # orphaned syminks
+MISSING	01;05;37;41 # ... and the files they point to
+EXEC	01;32	# This is for files with execute permission [ie, 700...]
+
+
+# executables [if they are not mod 700](bright green)
+.sh	01;32
+.ksh	01;32
+.bat	01;32
+.exe	01;32
+.com	01;32
+.app	01;32	# mac binaries; DIR color may override
+# DEAD
+#.csh	01;32
+
+# archives or compressed (bright red)
+.tar	01;31
+.tgz	01;31
+.tbz	01;31
+.zip	01;31
+.7z	01;31
+.gz 	01;31
+.bz2	01;31
+.rpm	01;31
+.deb	01;31
+.cab	01;31
+.rar	01;31
+.dmg	01;31
+.iso	01;31
+.jar	01;31	# Java & exe-ish, maybe new colour
+.war	01;31	# Java & exe-ish, maybe new colour
+# DEAD
+#.arj	01;31
+#.lzh	01;31
+#.taz	01;31
+#.z	01;31	# original gzip extension
+#.Z	01;31	# compress is evil!
+#.cpio	01;31
+
+# image formats
+.png	00;33
+.jpg	00;33
+.jpeg	00;33
+.gif	00;33
+.bmp	00;33
+.tif	00;33
+.tiff	00;33
+.ico	00;33
+.icns	00;33
+# very specialied formats
+#.pbm	01;33
+#.pgm	01;33
+#.ppm	01;33
+#.tga	01;33
+#.xbm	01;33
+#.xpm	01;33
+#.xcf	01;33
+#.xwd	01;33
+
+# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# documents
+.html	00;32
+.htm	00;32
+.dtd	00;32
+.txt	00;32
+.xml	00;32
+.xsl	00;32
+.doc	00;32	# MS Office doc/xls/ppt plus x
+.docx	00;32
+.ppt	00;32
+.pptx	00;32
+.xls	00;32
+.xlsx	00;32
+.rtf	00;32
+.rtfd	00;32	# rtf with images
+.pdf	00;32
+.ps	00;32
+.psd	00;32	# Photoshop doc
+.ai	00;32	# Adobe Illustrator
+# DEAD
+#.sgml	00;32	# yes, I said dead.
+
+# a/v formats
+.mpg	01;36
+.mpeg	01;36
+.mov	01;36
+.mp3	01;36
+.mp4	01;36
+.m4v	01;36
+.m4p	01;36
+.dv	01;36	# raw DV from camcorder
+.avi	01;36
+.wmv	01;36
+.wmv	01;36
+.wav	01;36
+.cda	01;36	# raw audio cd music
+.ogg	01;36
+.aac	01;36	# is this used anymore?
+# DEAD
+#.fli	01;36
+#.gl	01;36
+#.dl	01;36
+#.rm	01;36
+#.ram	01;36
+#.mng	01;36	# motion png
+
+# coding files
+.c	01;33	# C
+.m	01;33	# Objective-C
+.cpp	01;33	# C++
+.cs	01;33	# C-apartment-number-symbol
+.h	01;33	# C and sibling include
+.java	01;33
+.rb	01;33	# ruby
+.pl	01;33	# perl, if not chmod'd 700
+.py	01;33	# python
+.php	01;33
+.inc	01;33	# common in perl and php
+.asp	01;33
+# DEAD
+#.cxx	01;33	# just say no to using it!
+#.c++	01;33	# my filesystem supports that char and yours doesn't
+#.C	01;33	# just because you can, doesn't mean you should
+
+# coding helpers
+*Makefile	01;37
+*GNUmakefile 01;37
+.mk	01;37	# makefile
+.xcode	01;37	# Xcode / Project Builder (let's phase out the later)
+.pbproj	01;37	# Xcode / Project Builder (let's phase out the later)
+# DEAD
+#.jpx	01;37	# jbuilder project file
+
+# config files
+.conf	00;36
+.config	00;36
+.ini	00;36
+.asa	00;36	# Asp.net config
+*rc	00;36
+.ht*	00;36	# apache files, .htaccess .htpasswd
+
+# external links or pointers
+# TODO need a colour!
+.torrent	01;37
+.url	01;37
+.lnk	01;37
+
+
+# vi:ts=11:sts=11:tw=70

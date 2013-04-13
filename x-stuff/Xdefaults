@@ -1,0 +1,58 @@
+! vim:ts=15:sts=15:tw=72:syntax=xdefaults
+
+!############
+! xterm, rxvt, etc
+
+XTerm*highlightSelection:	true
+XTerm*VT100*colorBD:	blue
+XTerm*VT100*colorBDMode:	on
+XTerm.VT100*underLine:	off
+XTerm.VT100*colorULMode:	on
+XTerm*VT100*colorUL:	magenta
+XTerm*scrollBar:	true
+
+XTerm.background:	grey10
+XTerm.foreground:	grey90
+XTerm.cursorColor:	green
+XTerm.cursorColor2:	darkblue
+
+! titeInhibit (ie, "ti" and "te" inhibit) specifies whether or not to
+! ignore the "alternate screen" of applications such as less and vi.  when
+! true, apps will restore the screen contents when exiting.  when false,
+! the contents of the app will stay on the screen after the program is
+! quit.
+XTerm.VT100.titeInhibit:	true
+
+XTerm.VT100*colorMode:	on
+XTerm.VT100*dynamicColors:	on
+
+! num scroll back lines
+XTerm.saveLines:	1000
+
+XTerm*reverseWrap:	true
+
+rxvt.smallfont_key:	Alt-<
+rxvt.bigfont_key:	Alt->
+
+! default font (no number) is number rank 2.5
+! using -fn on cmd line throws this off (how, what does it do???)
+! rxvt and xterm seem to only recognize 1..4, not 1..6
+! xterm also ignores these alot.  so, perhaps i should make this Rxvt.*...
+XTerm.font:	7x13
+XTerm.font1:	5x7
+XTerm.font2:	6x10
+XTerm.font3:	8x16
+XTerm.font4:	10x20
+XTerm.font5:	12x24
+
+
+!---------------------
+! the following work for all programs, not just xterm.
+
+*visualBell:		true
+! when scrolling back, goto the bottom when tty gets output
+*scrollTtyOutput:	False
+! when scrolling back, goto the bottom when tty a keypress
+*scrollKey:		True
+! i forget...
+Scrollbar.JumpCursor:	True

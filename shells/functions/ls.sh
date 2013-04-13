@@ -28,11 +28,10 @@ elif [ "$VEGGIE_ARCH" = "osx" ]; then
 	export LSCOLORS=GxgxfxDxcxDxDxDbDbDbDb
 
 	alias ls='ls -G'
-	# in OSX/BSD ls, -o does *not* mean "no groups"
-	alias d='ls -Flh'
+	# Some point between 10.4 & 10.7, -o became supported!
+	alias d='ls -Flho'
 
 else 
-	# otherwise, all system 5 ls's will have -o mean "no groups"
 	alias d='ls -Flo'
 fi
 

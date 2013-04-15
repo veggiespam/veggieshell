@@ -14,5 +14,7 @@ be run in any order.
 	** l. -
 	** l - 
 
+* arch-cygwin - cygwin specific munges
+
 
 # vim:ts=4

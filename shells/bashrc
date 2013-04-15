@@ -61,13 +61,6 @@ if [ -d "$VEGGIE_HOME/$VEGGIE_ARCH/bin" ]; then
 	PATH="$VEGGIE_HOME/$VEGGIE_ARCH/bin:$PATH"
 fi
 
-# Source various files, set the order in the sourcefiles variable if needed.
-for i in "$VEGGIE_HOME"/shells/functions/*.sh; do
-	if [ -f "$i" ]; then
-		. "$i"
-	fi
-done
-
 postPATH /sbin /usr/sbin
 
 if [ "$VEGGIE_ARCH" = "sun" ]; then

@@ -1,8 +1,8 @@
-# vim:ts=4:sts=4:tw=75
+#
+# cygwin specific boot up script.  
+#
 
-# run for cygwin
-
-if [ $VEGGIE_ARCH != "cygwin" ]; then
+if [ "$VEGGIE_ARCH" != "cygwin" ]; then
 	# oops, don't run me
 	return
 fi
@@ -13,18 +13,21 @@ fi
 # fixes that and other items.
 
 if [ -z "`type -path vi`" ]; then
-	for vimtop in c:/vim "c:/Program Files/Vim"; do
-		vimtop=`cyg_path_munge $vimtop`
-		if [ -d "$vimtop" ]; then
+	for veggieboot_vimtop in c:/vim "c:/Program Files/Vim"; do
+		veggieboot_vimtop=`cyg_path_munge $veggieboot_vimtop`
+		if [ -d "$veggieboot_vimtop" ]; then
 			break
 		fi
 	done
-	for dir in vim70 vim64 vim63 vim62 vim61; do
-		if [ -d "$vimtop/$dir" ]; then
-			prePATH "$vimtop/$dir"
+	for veggieboot_dir in vim74 vim73 vim72 vim71 vim70 vim64 vim63 vim62 vim61; do
+		if [ -d "$veggieboot_vimtop/$veggieboot_dir" ]; then
+			prePATH "$veggieboot_vimtop/$veggieboot_dir"
 			break
 		fi
 	done
 	alias vi=vim
 fi
-unset vimtop dir
+
+unset veggieboot_vimtop veggieboot_dir
+
+# vim:ts=4:sts=4:tw=75

@@ -1,4 +1,4 @@
-# vim:ts=25
+# vim:ts=25:sts=25
 # This is a list of files which need to be symlinked into
 # the home directory.  There can be *NO* blank lines in this file.
 # 
@@ -10,4 +10,5 @@
 .bashrc	shells/bashrc
 .inputrc	utils/inputrc
 .lesskey	utils/lesskey
+.screenrc	utils/screenrc
 .Xdefaults	x-stuff/Xdefaults

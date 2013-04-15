@@ -2,7 +2,7 @@
 # run tail -f on a file in a new window
 function xtail () {
 	file=$1
-	$myxterm -fn 6x13 -geometry 80x40 -bg LightSeaGreen -fg Black \
+	$veggie_term -fn 6x13 -geometry 80x40 -bg LightSeaGreen -fg Black \
 		-name "tailing $file" -title "tailing $file" -e tail -f $file &
 }
 

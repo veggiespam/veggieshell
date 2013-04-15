@@ -69,7 +69,6 @@ for i in "$VEGGIE_HOME"/shells/functions/*.sh; do
 		. "$i"
 	fi
 done
-unset sourcefiles
 
 postPATH /sbin /usr/sbin
 postMAN /usr/local/man
@@ -99,10 +98,10 @@ fi
 unset TMOUT
 ulimit -t unlimited
 
-# default xterm-ish program, override in personal/shell/vars
-myxterm="rxvt"
+# default xterm-ish program used by aliases, override in personal bashrc
+veggie_xterm="rxvt"
 
-# default PS1 prompt, override in personal/shell/vars
+# default PS1 prompt, override in personal bashrc
 PS1='[\u@\h \W]\$ '
 
 
@@ -120,7 +119,7 @@ fi
 
 myuser=`who am i  | cut -d' ' -f1 | cut -d'!' -f2`
 if [ "$VEGGIE_ARCH" = "osx" ]; then
-	# FIXME: who -m ==> jay ttyp4 May 9 21:15 (localhost)
+	# FIXME: who -m ==> username ttyp4 May 9 21:15 (localhost)
 	#fromhost=`who -m | cut -f6`
 	fromhost=`who -m | awk '{print $6}'`
 	if [ -z "$fromhost" ]; then
@@ -132,9 +131,9 @@ if [ "$VEGGIE_ARCH" = "osx" ]; then
 	fi
 else
 	# FIXME
-	# WAS: who -ml ==> blahost!jay  pts/0  May  9 21:15 (localhost.localdomain)
+	# WAS: who -ml ==> blahost!user  pts/0  May  9 21:15 (localhost.localdomain)
 	# CHANGED: who -ml ==> -l is deprecated; plus format changed!
-	#			jay      pts/0        May 31 20:46 (192.168.1.102)
+	#			user      pts/0        May 31 20:46 (192.168.1.102)
 	# this doesn't work if there is no name, just IP!  ARGH!
 	fromhost=`who -m --lookup | cut -d\( -f2 | cut -d. -f1`
 	fromfqdn=`who -m --lookup | cut -d\( -f2 | cut -d\) -f1`
@@ -159,13 +158,15 @@ elif [ "$DISPLAY" = "" ]; then
 fi
 unset mydisp
 fi
-unset DISPLAY ;# FIXME WHY DOES IT NOT WORK?  SCREW IT FOR NOW
+#unset DISPLAY ;# FIXME WHY DOES IT NOT WORK?  SCREW IT FOR NOW
+
+
 #
-# set some fun behaviour
+# set some fun shell behaviour
 #
 
 # newer redhat's have the "feature" of doing case insensitive sorts when
-# you use ls.  take about annoying, now Makefile and CVS and README.html
+# you use ls.  talk about annoying, now Makefile and CVS and README.html
 # are buried in the middle of your files.  this (i hope) shuts that off.
 # TODO does not appear to work 
 shopt -u nocaseglob
@@ -198,27 +199,39 @@ command_oriented_history=1
 # your personal configs.  then, we load a custom config for the network which
 # you are using.  finally, we load up a config for this exact host.
 
-# load up shell/env vars; then command line completions; then aliases
+# load up personal bashrc and aliases
 for i in \
-		"$VEGGIE_HOME/shells/vars" \
-		"$VEGGIE_HOME/personal/shells/vars" \
-		"$VEGGIE_HOME/personal/shells/networks/$netname-vars" \
-		"$VEGGIE_HOME/personal/shells/hosts/$hostname-vars" \
+		"$VEGGIE_HOME/personal/shells/bashrc" \
+		"$VEGGIE_HOME/personal/shells/networks/$netname-bashrc" \
+		"$VEGGIE_HOME/personal/shells/hosts/$hostname-bashrc" \
 		\
-		"$VEGGIE_HOME/shells/completions" \
-		"$VEGGIE_HOME/personal/shells/completions" \
-		"$VEGGIE_HOME/personal/shells/networks/$netname-completions" \
-		"$VEGGIE_HOME/personal/shells/hosts/$hostname-completions" \
-		\
-		"$VEGGIE_HOME/shells/alias" \
-		"$VEGGIE_HOME/personal/shells/alias" \
-		"$VEGGIE_HOME/personal/shells/networks/$netname-alias" \
-		"$VEGGIE_HOME/personal/shells/hosts/$hostname-alias" \
-		\
-		"$VEGGIE_HOME/shells/functions/arch-$VEGGIE_ARCH" \
-		"$VEGGIE_HOME/personal/shells/functions/arch-$VEGGIE_ARCH" \
+		$VEGGIE_HOME/personal/shells/aliases/*.sh \
+		"$VEGGIE_HOME/personal/shells/networks/$netname-aliases" \
+		"$VEGGIE_HOME/personal/shells/hosts/$hostname-aliases" \
 	; do
 	if [ -f "$i" ]; then
-		. "$i"
+		source "$i"
 	fi
 done
+
+### Completions
+#
+# bash < 2.05 does not have 'complete -A users'
+# bash < 2.04 does not have 'complete -o'
+# bash < 2.03 does not have the complete command, at all
+# so just ignore all completions if bash version less than 2.05
+if [ \( ${BASH_VERSINFO[0]}  -gt 2 \) -o		\
+	\( \( ${BASH_VERSINFO[0]}  -eq 2 \) -a \( ${BASH_VERSINFO[1]} -ge 5 \) \) ]; then
+
+	for i in \
+			$VEGGIE_HOME/shells/completions/*.sh \
+			$VEGGIE_HOME/shells/completions/*.bash \
+			$VEGGIE_HOME/personal/shells/completions/*.sh \
+			$VEGGIE_HOME/personal/shells/completions/*.bash \
+		; do
+		if [ -f "$i" ]; then
+			source "$i"
+		fi
+	done
+fi
+

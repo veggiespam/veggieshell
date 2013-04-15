@@ -9,16 +9,64 @@
 # extensions that you could use if you're, ugh, still using those
 # items.
 
-# Below, there should be one TERM entry for each termtype that is colorizable
-# (these are the dircolors --print-database ones)
-TERM linux
+# Below, there should be one TERM entry for each termtype that is
+# colorizable as generated from dircolors --print-database .  
+# These all must be present or dircolors will return a blank list
+# during the initialization process and you will have no colors.
+
+TERM Eterm
+TERM ansi
+TERM color-xterm
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM cons25
 TERM console
-TERM xterm
-TERM xterm-color
+TERM cygwin
+TERM dtterm
+TERM eterm-color
+TERM gnome
+TERM gnome-256color
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mach-color
+TERM mlterm
+TERM putty
 TERM rxvt
+TERM rxvt-256color
+TERM rxvt-cygwin
+TERM rxvt-cygwin-native
+TERM rxvt-unicode
+TERM rxvt-unicode-256color
+TERM rxvt-unicode256
 TERM screen
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-bce
 TERM screen-w
+TERM screen.Eterm
+TERM screen.rxvt
+TERM screen.linux
+TERM st
+TERM st-256color
+TERM terminator
 TERM vt100
+TERM xterm
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian
 
 # Below are the color init strings for the basic file types. A color init
 # string consists of one or more of the following numeric codes:
@@ -29,49 +77,56 @@ TERM vt100
 # Background color codes:
 # 40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
 
+RESET	00	# reset to "normal" color
 NORMAL	00	# global default, although everything should be something.
 FILE	00 	# normal file
 DIR	01;34 	# directory
-LINK	01;36 	# symbolic link
-FIFO	00;40;33	# pipe
+LINK	01;36 	# symbolic link (can set to 'target' instead...)
+FIFO	40;33	# pipe
 SOCK	01;35	# socket
 DOOR	01;35	# door (Solaris only)
 BLK	01;33	# block device driver
 CHR	01;33 	# character device driver
 ORPHAN	01;05;37;41 # orphaned syminks
+SETUID	37;41	# file that is setuid (u+s)
+SETGID	30;43	# file that is setgid (g+s)
 MISSING	01;05;37;41 # ... and the files they point to
+CAPABILITY 30;41	# file with capability
 EXEC	01;32	# This is for files with execute permission [ie, 700...]
-
+MULTIHARDLINK 00;42	# regular file with more than one link
+STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
+OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
+STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 
 # executables (bright green) [if they are not mod 700]
-.sh	01;32
-.bash	01;32
-.ksh	01;32
-.zsh	01;32
-.bat	01;32
-.cmd	01;32
-.exe	01;32
-.com	01;32
-.app	01;32	# mac binaries; DIR color may override
+*.sh	01;32
+*.bash	01;32
+*.ksh	01;32
+*.zsh	01;32
+*.bat	01;32
+*.cmd	01;32
+*.exe	01;32
+*.com	01;32
+*.app	01;32	# mac binaries; DIR color may override
 # DEAD
 #.csh	01;32
 
 # archives or compressed (bright red)
-.tar	01;31
-.tgz	01;31
-.tbz	01;31
-.zip	01;31
-.7z	01;31
-.gz 	01;31
-.bz2	01;31
-.rpm	01;31
-.deb	01;31
-.cab	01;31
-.rar	01;31
-.dmg	01;31
-.iso	01;31
-.jar	01;31	# Java & exe-ish, maybe new colour
-.war	01;31	# Java & exe-ish, maybe new colour
+*.tar	01;31
+*.tgz	01;31
+*.tbz	01;31
+*.zip	01;31
+*.7z	01;31
+*.gz 	01;31
+*.bz2	01;31
+*.rpm	01;31
+*.deb	01;31
+*.cab	01;31
+*.rar	01;31
+*.dmg	01;31
+*.iso	01;31
+*.jar	01;31	# Java & exe-ish, maybe new colour
+*.war	01;31	# Java & exe-ish, maybe new colour
 # DEAD
 #.arj	01;31
 #.lzh	01;31
@@ -81,15 +136,15 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 #.cpio	01;31
 
 # image formats
-.png	00;33
-.jpg	00;33
-.jpeg	00;33
-.gif	00;33
-.bmp	00;33
-.tif	00;33
-.tiff	00;33
-.ico	00;33
-.icns	00;33
+*.png	00;33
+*.jpg	00;33
+*.jpeg	00;33
+*.gif	00;33
+*.bmp	00;33
+*.tif	00;33
+*.tiff	00;33
+*.ico	00;33
+*.icns	00;33
 # very specialied formats
 #.pbm	01;33
 #.pgm	01;33
@@ -101,42 +156,42 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 #.xwd	01;33
 
 # documents (light green)
-.html	00;32
-.htm	00;32
-.dtd	00;32
-.txt	00;32
-.xml	00;32
-.xsl	00;32
-.doc	00;32	# MS Office doc/xls/ppt plus x
-.docx	00;32
-.ppt	00;32
-.pptx	00;32
-.xls	00;32
-.xlsx	00;32
-.rtf	00;32
-.rtfd	00;32	# rtf with images
-.pdf	00;32
-.ps	00;32	# Postscript
-.psd	00;32	# Photoshop doc
-.ai	00;32	# Adobe Illustrator
+*.html	00;32
+*.htm	00;32
+*.dtd	00;32
+*.txt	00;32
+*.xml	00;32
+*.xsl	00;32
+*.doc	00;32	# MS Office doc/xls/ppt plus x
+*.docx	00;32
+*.ppt	00;32
+*.pptx	00;32
+*.xls	00;32
+*.xlsx	00;32
+*.rtf	00;32
+*.rtfd	00;32	# rtf with images
+*.pdf	00;32
+*.ps	00;32	# Postscript
+*.psd	00;32	# Photoshop doc
+*.ai	00;32	# Adobe Illustrator
 # DEAD
 #.sgml	00;32	# yes, I said dead.
 
 # a/v formats
-.mpg	01;36
-.mpeg	01;36
-.mov	01;36
-.mp3	01;36
-.mp4	01;36
-.m4v	01;36
-.m4p	01;36
-.dv	01;36	# raw DV from camcorder
-.avi	01;36
-.wmv	01;36
-.wav	01;36
-.cda	01;36	# raw audio cd music
-.ogg	01;36
-.aac	01;36	# is this used anymore?
+*.mpg	01;36
+*.mpeg	01;36
+*.mov	01;36
+*.mp3	01;36
+*.mp4	01;36
+*.m4v	01;36
+*.m4p	01;36
+*.dv	01;36	# raw DV from camcorder
+*.avi	01;36
+*.wmv	01;36
+*.wav	01;36
+*.cda	01;36	# raw audio cd music
+*.ogg	01;36
+*.aac	01;36	# is this used anymore?
 # DEAD
 #.fli	01;36
 #.gl	01;36
@@ -146,20 +201,20 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 #.mng	01;36	# motion png
 
 # coding files
-.c	01;33	# C
-.m	01;33	# Objective-C
-.mm	01;33	# Objective-C & C++ in same file
-.cpp	01;33	# C++
-.cs	01;33	# C-apartment-number-symbol
-.h	01;33	# C and sibling include
-.java	01;33
-.jsp	01;33
-.rb	01;33	# ruby
-.pl	01;33	# perl, if not chmod'd 700
-.py	01;33	# python
-.php	01;33
-.inc	01;33	# common in perl and php and jsp
-.asp	01;33
+*.c	01;33	# C
+*.m	01;33	# Objective-C
+*.mm	01;33	# Objective-C & C++ in same file
+*.cpp	01;33	# C++
+*.cs	01;33	# C-apartment-number-symbol
+*.h	01;33	# C and sibling include
+*.java	01;33
+*.jsp	01;33
+*.rb	01;33	# ruby
+*.pl	01;33	# perl, if not chmod'd 700
+*.py	01;33	# python
+*.php	01;33
+*.inc	01;33	# common in perl and php and jsp
+*.asp	01;33
 # DEAD
 #.cxx	01;33	# just say no to using it!
 #.c++	01;33	# my filesystem supports that char and yours doesn't
@@ -167,25 +222,25 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 
 # coding helpers
 *akefile	01;37	# Makefile, GNUmakefile, makefile
-.mk	01;37	# makefile
-.xcode	01;37	# Xcode / Project Builder (let's phase out the later)
-.pbproj	01;37	# Xcode / Project Builder
+*.mk	01;37	# makefile
+*.xcode	01;37	# Xcode / Project Builder (let's phase out the later)
+*.pbproj	01;37	# Xcode / Project Builder
 # DEAD
 #.jpx	01;37	# jbuilder project file
 
 # config files
-.conf	00;36
-.config	00;36
-.ini	00;36
-.asa	00;36	# Asp.net config
+*.conf	00;36
+*.config	00;36
+*.ini	00;36
+*.asa	00;36	# Asp.net config
 *rc	00;36
-.ht*	00;36	# apache files, .htaccess .htpasswd
+*.ht*	00;36	# apache files, .htaccess .htpasswd
 
 # external links or pointers
 # TODO need a new colour!
-.torrent	01;37
-.url	01;37
-.lnk	01;37
+*.torrent	01;37
+*.url	01;37
+*.lnk	01;37
 
 
 # vi:ts=11:sts=11:tw=70

@@ -1,7 +1,12 @@
+# Aliases and Functions
 
-These are independant functions and aliases that can
-be run in any order.
+These are independant bash aliases and function that can
+be included into the interactive bash shell in any order.  
+However, if there is is a dependancy, the shell will 
+read files in numerical, then alphabetic order (e.g., name
+earlier files 00-file.sh -- 99-file.sh).
 
+## Description of some files
 
 * ls - Figure out if we're running GNU ls, Mac ls, or SysV ls.  Then,
 	 set colors along with a bunch of aliases.  These are:
@@ -17,4 +22,4 @@ be run in any order.
 * arch-cygwin - cygwin specific munges
 
 
-# vim:ts=4
+vim:ts=4

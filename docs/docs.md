@@ -20,16 +20,18 @@ $HOME/.veggieshell.
 
 ## Usage 
     
-*   Copy the veggieshell archive into your $HOME dir and call it
-    .veggieshell.
-*   Look at $VEGGIE\_HOME/FileList and notice what files will be created
-    in your home dir. If you
-    currently have any of these files, make a backup of them as they 
-    will get clobbered and erased.
-*   Run the init script. Do this by just typing 'sh ./SymLink.sh' or
-    'sh ./.veggieshell/SymLink.sh'. The script will change dir to your $HOME dir and
-    then create symlinks to the files.
-*   Now, log out and back in or open a new window. You should now be
+*   Clone the veggieshell source tree from github.
+*   Copy the veggieshell dir into your $HOME dir and rename it to be
+    .veggieshell - you will still be able to perform git operations on 
+	it with the new name.
+*   The file $VEGGIE\_HOME/FileList contains a list of dot files that will be created
+    in your home dir.  If your home dir currently has any of these files, 
+	a backup will be made before the installer replaces them with symlinks
+    into $HOME/.veggieshell
+*   Run the init script by just typing 'sh ./SymLink.sh' or
+    'sh ./.veggieshell/SymLink.sh'. The script will change the working directory
+	to your $HOME dir and then create symlinks to the files.
+*   Now, log out and back in or open a new window or open a new shell. You should now be
     using Veggieshell.
 *   Edit the files as you please, but make sure to send me suggestions.
 *   For the shell scripts however, you have some added flexibility.

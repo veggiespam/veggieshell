@@ -24,28 +24,33 @@ VEGGIE_ARCH=`uname -s | sed \
         -e 's/.*[Bb][Ss][Dd].*/bsd/' \
         -e s/Linux/linux/`
 
+export VEGGIE_ARCH
+
 # since "linux" means alot of things, clairify it:
 if [ "$VEGGIE_ARCH" = "linux" ]; then
         VEGGIE_ARCH=`uname -m | sed \
                 -e s/.*86/linux/ \
                 -e s/ppc/yellowdog/ `
+elif [ -z "$VEGGIE_ARCH" ]; then
+	echo "WARNING: unknown architecture, Veggieshell may not run correctly."
 fi
-export VEGGIE_ARCH
+
 
 # now fetch the VEGGIE_ARCHVER ---> the OS version
 VEGGIE_ARCHVER=`uname -r`
 export VEGGIE_ARCHVER
 
 # OS X has different versions, so let's convert to Apple's versions
+# We can use the built-in $OSTYPE variable since it will be defined.
 if [ "$VEGGIE_ARCH" = "osx" ]; then
 	if [ "$OSTYPE" = "darwin12" ]; then 
 		VEGGIE_ARCHVER="10.8" ;				# Mountain Lion
 	elif [ "$OSTYPE" = "darwin11" ]; then 
 		VEGGIE_ARCHVER="10.7" ;				# Lion
 	elif [ "$OSTYPE" = "darwin10.9" ]; then 
-		VEGGIE_ARCHVER="10.2" ;				# Snow Leopard
+		VEGGIE_ARCHVER="10.6" ;				# Snow Leopard
 	elif [ "$OSTYPE" = "darwin9.0" ]; then 
-		VEGGIE_ARCHVER="10.2" ;				# Leopard
+		VEGGIE_ARCHVER="10.5" ;				# Leopard
 
 		# missing a few...
 

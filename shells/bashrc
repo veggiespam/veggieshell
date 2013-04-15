@@ -1,8 +1,8 @@
 # vim:ts=4:syntax=sh
 
 #echo bashrc
-# if we've already run bashrc, don't do it again!	see res alias below.
-if [ ! -z "$bashrc_did_run" ]; then
+# if we've already run bashrc, don't do it again!	see veggieres alias below.
+if [ ! -z "$veggie_bashrc_did_run" ]; then
 	return
 fi
 
@@ -37,15 +37,17 @@ fi
 
 # save the original path.	the res alias will re-read the bashrc.	but,
 # the path can get expanded to huge lengths causing errors, so save orig!
-originalpath="$PATH"
-originalmanpath="$MANPATH"
-bashrc_did_run=1
-alias res='unset bashrc_did_run; export PATH="$originalpath" MANPATH="$originalmanpath"; source "$HOME"/.bashrc'
+veggie_originalpath="$PATH"
+veggie_originalmanpath="$MANPATH"
+veggie_bashrc_did_run=1
+alias veggieres='unset veggie_bashrc_did_run; export PATH="$veggie_originalpath" MANPATH="$veggie_originalmanpath"; source "$HOME"/.bashrc'
+
+# Now that we have the original paths saved, we can start appending it
 
 # add /ulb to path, since init scripts may need it.
 prePATH /usr/local/bin
 
-# add $conf's script dir
+# add Veggieshell's script dir
 if [ -d "$VEGGIE_HOME/scripts" ]; then
 	#prePATH `cyg_path_munge "$VEGGIE_HOME/scripts"`
 	#prePATH "$VEGGIE_HOME/scripts"
@@ -100,12 +102,12 @@ veggie_xterm="rxvt"
 PS1='[\u@\h \W]\$ '
 
 
-# not all hostname programs are created equal, some return FQDN, others just hostname.
+# Not all hostname programs are created equal, some return FQDN, others just hostname.
 # We cannot always trust bash's $HOSTNAME.  See historial/set-hostname.sh for complaints.
 veggie_hostname=`hostname -s`
 
-# netname is no longer used - it cannot reliable be determine on some
-# Linux and OS X.  Too much DHCP screws it up.
+# netname is no longer used - it cannot reliable be determined on some
+# Linux and OS X installs.  Too much DHCP screws it up.
 
 
 #
@@ -150,6 +152,7 @@ for i in \
 		"$VEGGIE_HOME/personal/shells/bashrc" \
 		"$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-bashrc" \
 		\
+		$VEGGIE_HOME/shells/aliases/*.sh \
 		$VEGGIE_HOME/personal/shells/aliases/*.sh \
 		"$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-aliases" \
 	; do

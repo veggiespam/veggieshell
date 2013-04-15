@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tmpfile=tmp_conf_build.$$
+tmpfile=veggieshell_installer_tmpfile_$$.sh
 cd "$HOME"
 VEGGIE_HOME="$HOME/.veggieshell"
 
@@ -9,14 +9,14 @@ if [ ! -f "$VEGGIE_HOME/FileList" ]; then
 	return 1
 fi
 
-echo You can safely ignore any File Does Not Exist errors
-echo All your original files are in the Before-Veggieshell directory
+echo Any existing configuration files will be moved to the
+echo Before-Veggieshell directory.  
 
-mkdir Before-Veggieshell
+mkdir -p Before-Veggieshell
 
 cat "$VEGGIE_HOME/FileList" | \
 	grep -v '^#' | \
-	awk '{printf "mv -f \"%s\" Before-Veggieshell; ln -s \"$VEGGIE_HOME/%s\" \"%s\"\n", $1, $2, $1}' \
+	awk '{printf "if [ -e \"%s\" ] ; then mv -f \"%s\" Before-Veggieshell; ln -s \"$VEGGIE_HOME/%s\" \"%s\" ;  fi \n", $1, $1, $2, $1}' \
 	> $tmpfile
 
 . $tmpfile

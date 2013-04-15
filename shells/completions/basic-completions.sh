@@ -22,14 +22,6 @@ for i in /etc/hosts \
 	fi
 done
 
-# bash <= 2.03 does not have the complete command, so ignore this file
-# what the fsck is GNU thinking with version=2.05a.0(1)-release ?
-if [ \( ${BASH_VERSINFO[0]}  -lt 2 \) -o		\
-	\( ${BASH_VERSINFO[0]}  -eq 2				\
-		-a `echo ${BASH_VERSINFO[1]} | sed 's/[a-z]//'` -le 3 \) ]; then
-	return
-fi
-
 # and now, the commands for which the non-@ completions work
 complete -A hostname telnet rlogin rsh
 complete -A hostname ncftp ncftpget ftp
@@ -57,21 +49,6 @@ complete -A shopt shopt
 complete -A setopt setopt
 complete -A alias unalias
 complete -A helptopic help
-
-## only bash < 2.04 does not have 'complete -o'
-#if [ \( ${BASH_VERSINFO[0]}  -lt 2 \) -o		\
-#	\( ${BASH_VERSINFO[0]}  -eq 2				\
-#		-a ${BASH_VERSINFO[1]} -lt 4 \) ]; then
-#	return
-#fi
-
-# only bash < 2.05 does not have 'complete -A users'
-if [ \( ${BASH_VERSINFO[0]}  -lt 2 \) -o		\
-	\( ${BASH_VERSINFO[0]}  -eq 2				\
-		-a `echo ${BASH_VERSINFO[1]} | sed 's/[a-z]//'` -lt 5 \) ]; then
-	return
-fi
-
 complete -A user write tell chown finger
 
 ## TODO - incorporate some of http://bashcookbook.com/bashinfo/source/bash-4.2/examples/complete/complete-examples

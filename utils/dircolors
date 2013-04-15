@@ -163,8 +163,7 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 #.C	01;33	# just because you can, doesn't mean you should
 
 # coding helpers
-*Makefile	01;37
-*GNUmakefile 01;37
+*akefile	01;37	# Makefile, GNUmakefile, makefile
 .mk	01;37	# makefile
 .xcode	01;37	# Xcode / Project Builder (let's phase out the later)
 .pbproj	01;37	# Xcode / Project Builder (let's phase out the later)

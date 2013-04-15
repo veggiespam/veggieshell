@@ -1,4 +1,7 @@
-" vim:ts=4:sts=4
+"
+"   Vim / gvim / MacVim config file
+"
+
 
 " start with a bunch of basic things
 set backspace=2		" 2: you can backspace over eol and start of insert
@@ -24,7 +27,7 @@ set wildignore+=*.swp,*.swo,*.bak,*~,*.o,*.dbg	" ignore dumb files
 set tags=./tags,../tags,../tags					" set initial ctags search path
 set modelines=5		" num lines of file to check for vim:... commands
 set history=50		" number of : or / cmd lines to remember
-set showfulltag		" when doing tag match, show f'n prototype (TESTME)
+set showfulltag		" when doing tag match, show f'n prototype (XXX TESTME)
 
 set ttyfast			" vim writes screen faster always, not just xterm/rxvt/etc
 
@@ -33,7 +36,7 @@ set laststatus=1	" give me a status line only when there are 2+ windows
 " delete != backspace  ?????
 map!  
 
-:syntax on
+syntax on
 
 " programming options
 set autoindent		" indent to previous line's indention
@@ -78,7 +81,7 @@ nmap :W :w			" how often to do you type :W and mean :w
 syntax on
 
 " by default, we assume we have a dark (near black) background
-let background="dark"
+set background=dark
 
 if version >= 700 
 	" underline the status line and mode indicator in insert mode
@@ -160,13 +163,27 @@ endif
 
 
 if has("gui_running")
-	set guifont=6x13
+
+    if has("gui_gtk2")
+		set guifont=Luxi\ Mono\ 12
+    elseif has("x11")
+		" Also for GTK 1
+		set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+		set guifont=6x13
+    elseif has("gui_win32")
+		set guifont=Luxi_Mono:h12:cANSI
+    elseif has("gui_macvim")
+        set guifont=DejaVu\ Sans\ Mono:h13
+        set guifont=Menlo\ Regular:h14
+    endif
+
+
 	" black on white sucks, so change the colour to something fancy
 	highlight Normal guibg=black guifg=grey90
 
 	" change File:Print menu
-	amenu File.Print :w !lpr -h
-	vmenu File.Print :w !lpr -h
+	"amenu File.Print :w !lpr -h
+	"vmenu File.Print :w !lpr -h
 
 	" FIXME these don't work....  how...?
 	menu Edit.Wrap-off :set nowrap <CR> :set guioptions+=b<CR>
@@ -182,8 +199,9 @@ if has("gui_running")
 	set guioptions-=t
 	set guioptions-=T
 	" a&A copy the selection to the system clipboard
-	set guioptions+=Aa
+	set guioptions+=aA
 endif
+
 
 "highlight Comment guifg=green ctermfg=darkred
 
@@ -224,3 +242,4 @@ unlet tmp_var
 " TODO Things to look up:
 " copyindent & preserveindent
 
+" vim:ts=4:sts=4

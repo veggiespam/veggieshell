@@ -43,10 +43,13 @@ MISSING	01;05;37;41 # ... and the files they point to
 EXEC	01;32	# This is for files with execute permission [ie, 700...]
 
 
-# executables [if they are not mod 700](bright green)
+# executables (bright green) [if they are not mod 700]
 .sh	01;32
+.bash	01;32
 .ksh	01;32
+.zsh	01;32
 .bat	01;32
+.cmd	01;32
 .exe	01;32
 .com	01;32
 .app	01;32	# mac binaries; DIR color may override
@@ -74,7 +77,7 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 #.lzh	01;31
 #.taz	01;31
 #.z	01;31	# original gzip extension
-#.Z	01;31	# compress is evil!
+#.Z	01;31	# compress is evil
 #.cpio	01;31
 
 # image formats
@@ -97,8 +100,7 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 #.xcf	01;33
 #.xwd	01;33
 
-# 30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
-# documents
+# documents (light green)
 .html	00;32
 .htm	00;32
 .dtd	00;32
@@ -114,7 +116,7 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 .rtf	00;32
 .rtfd	00;32	# rtf with images
 .pdf	00;32
-.ps	00;32
+.ps	00;32	# Postscript
 .psd	00;32	# Photoshop doc
 .ai	00;32	# Adobe Illustrator
 # DEAD
@@ -131,7 +133,6 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 .dv	01;36	# raw DV from camcorder
 .avi	01;36
 .wmv	01;36
-.wmv	01;36
 .wav	01;36
 .cda	01;36	# raw audio cd music
 .ogg	01;36
@@ -147,15 +148,17 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 # coding files
 .c	01;33	# C
 .m	01;33	# Objective-C
+.mm	01;33	# Objective-C & C++ in same file
 .cpp	01;33	# C++
 .cs	01;33	# C-apartment-number-symbol
 .h	01;33	# C and sibling include
 .java	01;33
+.jsp	01;33
 .rb	01;33	# ruby
 .pl	01;33	# perl, if not chmod'd 700
 .py	01;33	# python
 .php	01;33
-.inc	01;33	# common in perl and php
+.inc	01;33	# common in perl and php and jsp
 .asp	01;33
 # DEAD
 #.cxx	01;33	# just say no to using it!
@@ -166,7 +169,7 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 *akefile	01;37	# Makefile, GNUmakefile, makefile
 .mk	01;37	# makefile
 .xcode	01;37	# Xcode / Project Builder (let's phase out the later)
-.pbproj	01;37	# Xcode / Project Builder (let's phase out the later)
+.pbproj	01;37	# Xcode / Project Builder
 # DEAD
 #.jpx	01;37	# jbuilder project file
 
@@ -179,7 +182,7 @@ EXEC	01;32	# This is for files with execute permission [ie, 700...]
 .ht*	00;36	# apache files, .htaccess .htpasswd
 
 # external links or pointers
-# TODO need a colour!
+# TODO need a new colour!
 .torrent	01;37
 .url	01;37
 .lnk	01;37

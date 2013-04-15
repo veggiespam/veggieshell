@@ -31,13 +31,13 @@ if [ \( ${BASH_VERSINFO[0]}  -lt 2 \) -o		\
 fi
 
 # and now, the commands for which the non-@ completions work
-complete -A hostname telnet rlogin ftp rsh
+complete -A hostname telnet rlogin rsh
 complete -A hostname ncftp ncftpget ftp
-complete -A hostname ssh ssh2 scp 
+complete -A hostname ssh ssh2 scp sftp
 complete -A hostname dig ping tcpdump nc
 
 # for web browsers, we want to complete filename too, so 2x-A
-complete -A hostname -A file lynx wget curl
+complete -A hostname -A file lynx wget curl 
 
 # variables
 complete -A variable export e unset printenv
@@ -73,6 +73,8 @@ if [ \( ${BASH_VERSINFO[0]}  -lt 2 \) -o		\
 fi
 
 complete -A user write tell chown finger
+
+## TODO - incorporate some of http://bashcookbook.com/bashinfo/source/bash-4.2/examples/complete/complete-examples
 
 
 # the rest of this file is an enhanced version of some brilliant code
@@ -179,6 +181,8 @@ _configure_func ()
 }
 complete -F _configure_func configure
 
+
+
 # cvs(1) completion
 _cvs ()
 {
@@ -197,6 +201,9 @@ _cvs ()
 }
 complete -F _cvs cvs
 
+
+
+
 _killall ()
 {
 	local cur prev
@@ -212,27 +219,7 @@ _killall ()
 complete -F _killall killall sskill
 complete -A signal skill kill
 
-_tai () {
-	local cur
-	COMPREPLY=()
-	cur=${COMP_WORDS[COMP_CWORD]}
-	#echo $cur >&2
-	COMPREPLY=( $( ls -d /service/* |grep "/service/${cur}" |
-		sed -E 's,^/service/,,'))
-	return 0
-}
-#complete -o default -F _tai -P '/service/' -S '/log/current' tai
-complete -o default -F _tai tai
 
-_go () {
-	local cur
-	COMPREPLY=()
-	cur=${COMP_WORDS[COMP_CWORD]}
-	COMPREPLY=( $( ls ~/.going/* |grep "/.going/${cur}" |
-				sed -E 's,^/root/.going/,,' ) )
-	return 0
-}
-complete -o default -F _go go here
 
 function _chgrp {
 	local cur
@@ -242,6 +229,8 @@ function _chgrp {
 	return 0
 }
 complete -o default -F _chgrp chgrp
+
+
 
 # man(1) completion
 _man ()
@@ -269,7 +258,10 @@ _man ()
 	return 0
 }
 # FIXME - "sed -E" is not valid on darwin - does it strip off the .1 stuff?
+# FIXME - unsure if this works on darwin 10.8 even.
 complete -F _man man
+
+
 
 # openssl(1) completion
 _openssl ()

@@ -1,3 +1,8 @@
+#
+# It appears that modern OS X and Linux finally set these correctly.
+# Thus, this code was removed from bashrc and saved here just in case.
+# We may need this for a future OS.
+#
 
 # not all hostname programs are created equal,
 # some return FQDN, others just hostname
@@ -14,6 +19,8 @@ fi
 myuser=`who am i  | cut -d' ' -f1 | cut -d'!' -f2`
 if [ "$VEGGIE_ARCH" = "osx" ]; then
 	# FIXME: who -m ==> username ttyp4 May 9 21:15 (localhost)
+	# CHANGED: who -m ==> username ttyp4 May 9 21:15
+
 	#fromhost=`who -m | cut -f6`
 	fromhost=`who -m | awk '{print $6}'`
 	if [ -z "$fromhost" ]; then
@@ -33,3 +40,4 @@ else
 	fromfqdn=`who -m --lookup | cut -d\( -f2 | cut -d\) -f1`
 fi
 
+# vim:ts=4:sts=4

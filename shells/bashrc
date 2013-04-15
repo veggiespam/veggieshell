@@ -28,15 +28,11 @@ source "$VEGGIE_HOME/shells/boot/paths.sh"
 # ignores the implicit defaults.  dumb.  so, save the trouble and set an
 # initial path.
 if [ -z "$MANPATH" ]; then
-	if [ -d /usr/man ]; then
-		postMAN /usr/man
-	fi
-	if [ -d /usr/share/man ]; then
-		postMAN /usr/share/man
-	fi
-	if [ -d /man ]; then
-		postMAN /man
-	fi
+	for i in /usr/local/man  /usr/man  /usr/share/man  /man ; do
+		if [ -d "$i" ]; then
+			postMAN "$i"
+		fi
+	done
 fi
 
 # save the original path.	the res alias will re-read the bashrc.	but,
@@ -71,7 +67,6 @@ for i in "$VEGGIE_HOME"/shells/functions/*.sh; do
 done
 
 postPATH /sbin /usr/sbin
-postMAN /usr/local/man
 
 if [ "$VEGGIE_ARCH" = "sun" ]; then
 	postPATH /opt/SUNWspro/bin /usr/ccs/bin /usr/openwin/bin
@@ -105,60 +100,12 @@ veggie_xterm="rxvt"
 PS1='[\u@\h \W]\$ '
 
 
-# not all hostname programs are created equal,
-# some return FQDN, others just hostname
-hostname=`hostname | cut -d. -f 1`
+# not all hostname programs are created equal, some return FQDN, others just hostname.
+# We cannot always trust bash's $HOSTNAME.  See historial/set-hostname.sh for complaints.
+veggie_hostname=`hostname -s`
 
-if [ "$VEGGIE_ARCH" = "osx" ]; then
-	netname=`domainname 2> /dev/null`
-else
-	# FIXME fix this....
-	netname=`dnsdomainname 2> /dev/null`
-	res=$?
-fi
-
-myuser=`who am i  | cut -d' ' -f1 | cut -d'!' -f2`
-if [ "$VEGGIE_ARCH" = "osx" ]; then
-	# FIXME: who -m ==> username ttyp4 May 9 21:15 (localhost)
-	#fromhost=`who -m | cut -f6`
-	fromhost=`who -m | awk '{print $6}'`
-	if [ -z "$fromhost" ]; then
-		fromhost=localhost
-		fromfqdn=localhost
-	else
-		fromhost=`who -m | cut -d\( -f2 | cut -d. -f1 | cut -d\) -f1`
-		fromfqdn=`who -m | cut -d\( -f2 | cut -d\) -f1`
-	fi
-else
-	# FIXME
-	# WAS: who -ml ==> blahost!user  pts/0  May  9 21:15 (localhost.localdomain)
-	# CHANGED: who -ml ==> -l is deprecated; plus format changed!
-	#			user      pts/0        May 31 20:46 (192.168.1.102)
-	# this doesn't work if there is no name, just IP!  ARGH!
-	fromhost=`who -m --lookup | cut -d\( -f2 | cut -d. -f1`
-	fromfqdn=`who -m --lookup | cut -d\( -f2 | cut -d\) -f1`
-fi
-
-# sometimes, the display var gets mucked up, especially when there is
-# no DNS.  so, this sets 
-#	DISPLAY=hostname:0.0	to :0
-#	fromhost=localhost	to :0
-#	blank DISPLAY		to fromhost:0
-if [ 0 ]; then
-# FIXME **DISABLE THIS**  problem with vi and remote DISPLAY!!
-mydisp=`echo $DISPLAY | cut -d: -f 1`
-if [ "$mydisp" = "$hostname" ]; then
-	# the d0 command is defined in x-stuff.sh
-	d0
-elif [ "$fromhost" = localhost ]; then
-	d0
-elif [ "$DISPLAY" = "" ]; then
-	# this has the side effect of setting blank fromfqdn to :0, good.
-	export DISPLAY="$fromfqdn:0"
-fi
-unset mydisp
-fi
-#unset DISPLAY ;# FIXME WHY DOES IT NOT WORK?  SCREW IT FOR NOW
+# netname is no longer used - it cannot reliable be determine on some
+# Linux and OS X.  Too much DHCP screws it up.
 
 
 #
@@ -196,18 +143,15 @@ command_oriented_history=1
 # now, load up personal config files.  we load up shell/env vars first, then
 # command line completion macros, and finally aliases.  for each grouping, we
 # first load the system files which come with this toolkit.  next, we load a
-# your personal configs.  then, we load a custom config for the network which
-# you are using.  finally, we load up a config for this exact host.
+# your personal configs.  then, we load a custom config for this hostname.
 
 # load up personal bashrc and aliases
 for i in \
 		"$VEGGIE_HOME/personal/shells/bashrc" \
-		"$VEGGIE_HOME/personal/shells/networks/$netname-bashrc" \
-		"$VEGGIE_HOME/personal/shells/hosts/$hostname-bashrc" \
+		"$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-bashrc" \
 		\
 		$VEGGIE_HOME/personal/shells/aliases/*.sh \
-		"$VEGGIE_HOME/personal/shells/networks/$netname-aliases" \
-		"$VEGGIE_HOME/personal/shells/hosts/$hostname-aliases" \
+		"$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-aliases" \
 	; do
 	if [ -f "$i" ]; then
 		source "$i"

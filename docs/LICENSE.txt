@@ -1,0 +1,8 @@
+Files with an indicated License embedded are licensed by those terms.
+
+If a file has no license at the top, it is probably written by me and
+is GPL v2.  
+
+There are some public domain files, such as ansi-colors.sh, which was
+placed in the public domain by the author.  As such, I leave those files
+in public domain.

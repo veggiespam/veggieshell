@@ -1,4 +1,3 @@
-# vim:ts=4
 
 # this file contains the aliases.  see also:
 #	functions/ls.sh for addition "dir" related commands
@@ -26,6 +25,7 @@ alias vt100='export TERM=vt100'
 alias rows='stty rows $1'
 alias cols='stty cols $1'
 
-# really misc stuff
+# Read raw nroff file in man style
 alias roff='nroff -man $* | $PAGER'
 
+# vim:ts=4

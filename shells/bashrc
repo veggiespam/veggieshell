@@ -135,19 +135,22 @@ shopt -s cdspell
 # crtl J means a newline in the output, fyi.
 command_oriented_history=1
 
-# now, load up personal config files.  we load up shell/env vars first, then
-# command line completion macros, and finally aliases.  for each grouping, we
-# first load the system files which come with this toolkit.  next, we load a
-# your personal configs.  then, we load a custom config for this hostname.
-
-# load up personal bashrc and aliases
+### Aliases and Functions
+#
+# Now, load up the rest of the config files:
+#   1.	Personal bashrc
+#	2.	Host-specific bashrc
+#	3.	Veggieshell aliases and functions in shells/aliases/*.sh
+#	4.	Personal aliases
+#	5.	Host-specific aliases
+#
 for i in \
-		"$VEGGIE_HOME/personal/shells/bashrc" \
-		"$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-bashrc" \
+		$VEGGIE_HOME/personal/shells/bashrc \
+		$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-bashrc \
 		\
 		$VEGGIE_HOME/shells/aliases/*.sh \
 		$VEGGIE_HOME/personal/shells/aliases/*.sh \
-		"$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-aliases" \
+		$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-aliases \
 	; do
 	if [ -f "$i" ]; then
 		source "$i"
@@ -168,6 +171,7 @@ if [ \( ${BASH_VERSINFO[0]}  -gt 2 \) -o		\
 			$VEGGIE_HOME/shells/completions/*.bash \
 			$VEGGIE_HOME/personal/shells/completions/*.sh \
 			$VEGGIE_HOME/personal/shells/completions/*.bash \
+			$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-completions \
 		; do
 		if [ -f "$i" ]; then
 			source "$i"

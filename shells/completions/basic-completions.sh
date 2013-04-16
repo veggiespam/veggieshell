@@ -13,9 +13,8 @@
 # of bash.  To shut this off, unset HOSTFILE.
 
 for i in /etc/hosts \
-		"$VEGGIE_HOME/personal/shells/networks/$netname-hostfile" \
-		"$VEGGIE_HOME/personal/shells/hosts/$hostname-hostfile" \
 		"$VEGGIE_HOME/personal/shells/hostfile" \
+		"$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-hostfile" \
 	; do
 	if [ -f "$i" ]; then
 		HOSTFILE="$i"

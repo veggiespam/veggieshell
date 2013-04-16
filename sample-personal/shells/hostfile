@@ -6,6 +6,11 @@
 # Make this file look like /etc/hosts (which is read first).  This
 # file overrides all host an network specific hostname <tab> things.
 #
+# Bash allows you to have multiple hostfiles that build on one another,
+# so it is possible to have host specific hostfiles later.  See
+# shells/completions/basic-completions.sh for more info.
+#
+
 
 # format:
 #ip-address host-name host-name.domain.com funky-alias-for-host

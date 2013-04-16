@@ -9,6 +9,7 @@
 # Written and placed in the public domain by Ian Abbott <ian@abbott.org>
 # see: https://sourceforge.net/snippet/detail.php?type=snippet&id=100681
 #
+# Note: URL is now dead.
 
 for h in 0 1; do
   echo -e "\\033[0;${h}m\\c"

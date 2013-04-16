@@ -19,7 +19,11 @@ earlier files 00-file.sh -- 99-file.sh).
 	** l. -
 	** l - 
 
-* arch-cygwin - cygwin specific munges
+* arch-cygwin - cygwin specific munges.  This is a no-op on non-Cygwin.
+
+* mail - functions for quickly mailing stuff.  This function needs updating for 
+	the modern mail age of mime and other mailers.  Modern mailers cannot read 
+	uuencoding.
 
 
 vim:ts=4

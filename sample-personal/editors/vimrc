@@ -1,6 +1,7 @@
-" vim:ts=4
 
-" in this file, place your personal defaults or system overrides.
+" In this file, place your personal defaults or system overrides.
+" This file is loaded after the Veggieshell vimrc config.
+
 " some common choices:
 
 if has("gui_running")
@@ -8,3 +9,4 @@ if has("gui_running")
 	"set guioptions-=b
 endif
 
+" vim:ts=4

@@ -1,7 +1,7 @@
 #
-# This file contain all your personal environment variable settings or ones
-# meant for this specific system.  Set vars here to override other vars
-# before we do aliases.
+# This file contain all your personal alias settings or ones meant for this
+# specific system.  Set vars in bashrc to override other vars before we do
+# aliases.
 #
 
 # common remote computers

@@ -1,14 +1,17 @@
-
+#
 # TERM variable setup.  
-# this file sets up $TERM, since it tends to get munged.  it tries to figure
-# out compatable TERMs when yours is not found.  a common one is rxvt => xterm
-# translations.
+#
+# This file sets up $TERM in cases where it tends to get munged. The
+# script here tries to figure out compatable TERMs when yours is not
+# found.  One of the more common ones is rxvt => xterm translations.
+#
+# Our hope is that you never need this file, but it seems to be needed
+# in some cases.  Right now, this file is disabled as none of the more
+# modern systems we use seem to need this file's extra magic.  This
+# file probably needs updating if you do fine a system where it this
+# file is needed.
 
-# our hope is that you never need this file, but it seems to be
-# needed in many cases.  right now, it is disabled and none of my
-# systems seems to need its extra magic.
-
-return 
+return  ; # basically, don't run this file.
 
 # since osx 10.{234} does wierd things with termcap, we just assume it is 
 # set correctly and ignore it
@@ -98,4 +101,4 @@ fi
 
 unset in_termcap do_termcap terminfofile terminfodir letter thisfile termcapfile
 
-# vim:ts=4
+# vim:ts=4:sts=4

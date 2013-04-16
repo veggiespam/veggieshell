@@ -20,8 +20,8 @@ shopt -s expand_aliases
 # set the machine arch - needed for cygwin's annoying c:\ stuff
 . "$VEGGIE_HOME/shells/set-arch.sh"
 
-# this is a very useful little function.  run it now, since we use it now.
-. "$VEGGIE_HOME/shells/functions/paths.sh"
+# load prePATH postPATH functions, since we use them during the boot
+. "$VEGGIE_HOME/shells/boot/paths.sh"
 
 # some systems (osx/redhat) do not define MANPATH and let man itself have
 # defaults.  but, when we append MANPATH, man only reads $MANPATH and

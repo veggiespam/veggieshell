@@ -23,8 +23,8 @@ if [ "$VEGGIE_ARCH" = "osx" ]; then
 	alias l='ls -hsF'
 
 	# mac ls is still useful for extended attributes, so alias the old version
-	alias mls='/bin/ls'
-	alias macls='/bin/ls'
+	alias mls='/bin/ls -G'
+	alias macls='/bin/ls -G'
 fi
 
 

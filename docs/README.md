@@ -121,9 +121,14 @@ directly.
 > bash 3.x, less munging is needed and Veggieshell works fine.
 > 
 
-****
-> 
-> 
+** Why don't use use the full bash-completion project?
+**
+>  The complete Bash-Completion project archive is 20MB.  Veggieshell is only
+>  1MB.  Our goal "good enough", not "kitchen sink".  Per the FAQ,
+>  Bash-Completion assumes you're running Bash 4.1 or newer; most people
+>  are not.  If you want more completions, add to your personal dir.  We
+>  may, however, use some of their files where noted if they work with 
+>  older bash versions.
 
 ## Todo and Obscure Ideas 
     

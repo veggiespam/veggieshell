@@ -37,10 +37,12 @@ set laststatus=1	" give me a status line only when there are 2+ windows
 map!  
 
 syntax on
+" Some versions of vim have Module-2 mapped to *.md - override
+au BufRead,BufNewFile *.md setfiletype markdown
 
 " programming options
 set autoindent		" indent to previous line's indention
-set nosmartindent	" use cindent instead
+set nosmartindent	" use cindent instead FIXME  test this again.
 set cindent			" enables c-style indents on { and }
 
 " vim 5.8 defaults
@@ -66,8 +68,8 @@ autocmd BufRead		*.txt set tw=72
 autocmd BufNewFile	*.txt set tw=72
 
 " chmod +x shell and perl programs - FIXME
-"autocmd BufWritePost   *.sh             !chmod ugo+x %
-"autocmd BufWritePost   *.pl             !chmod ugo+x %
+"autocmd BufWritePost   *.sh			 !chmod ugo+x %
+"autocmd BufWritePost   *.pl			 !chmod ugo+x %
 
 " key remaps
 inoremap <C-a> <Home>	" increment is useless, make ^A like shell line
@@ -89,8 +91,8 @@ if version >= 700
 	au InsertEnter * hi StatusLine term=reverse ctermbg=5 gui=undercurl guisp=Magenta 
 	au InsertLeave * hi StatusLine term=reverse ctermfg=0 ctermbg=2 gui=bold,reverse 
 	"requires set showmode (by default, i shut it off)
-    au InsertLeave * hi ModeMsg ctermfg=black ctermbg=yellow gui=undercurl guisp=Magenta 
-    au InsertEnter * hi ModeMsg ctermfg=white ctermbg=none 
+	au InsertLeave * hi ModeMsg ctermfg=black ctermbg=yellow gui=undercurl guisp=Magenta 
+	au InsertEnter * hi ModeMsg ctermfg=white ctermbg=none 
 
 	" highlights the current line you're editing   (laststatus must be 1 or 2)
 	" from http://www.vim.org/tips/tip.php?tip_id=1293 
@@ -124,12 +126,15 @@ endif
 
 " :help E436   -- to see terminal options
 
-"if (0) " for now, just turn all this off.  it appears to work again.
+" older versions of OS X, Cygwin, and Redhat completely screwed
+" up the termcap, terminfo, and $TERM - so we had to manually
+" set the colors.  Now, it appears xterm-256 color works.  So,
+" just comment all of this out.
 
+if (0) " for now, just turn all this off.  it appears to work again.
 " if &term=="xterm"
 " 	set t_Co=8
 "endif
-
 if has("terminfo")
 "if (1)
 	" here, we should determin number of colours.  for now,
@@ -158,24 +163,23 @@ else
 	"set t_AB=[%?%p1%{8}%<%t%p1%{40}%+%e%p1%{92}%+%;%dm
 	"set t_AF=[%?%p1%{8}%<%t%p1%{30}%+%e%p1%{82}%+%;%dm
 endif
-
-"endif " end if 0
+endif " end if 0 terminal color stuff
 
 
 if has("gui_running")
 
-    if has("gui_gtk2")
+	if has("gui_gtk2")
 		set guifont=Luxi\ Mono\ 12
-    elseif has("x11")
+	elseif has("x11")
 		" Also for GTK 1
 		set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
 		set guifont=6x13
-    elseif has("gui_win32")
+	elseif has("gui_win32")
 		set guifont=Luxi_Mono:h12:cANSI
-    elseif has("gui_macvim")
-        set guifont=DejaVu\ Sans\ Mono:h13
-        set guifont=Menlo\ Regular:h14
-    endif
+	elseif has("gui_macvim")
+		set guifont=DejaVu\ Sans\ Mono:h13
+		set guifont=Menlo\ Regular:h14
+	endif
 
 
 	" black on white sucks, so change the colour to something fancy
@@ -185,9 +189,8 @@ if has("gui_running")
 	"amenu File.Print :w !lpr -h
 	"vmenu File.Print :w !lpr -h
 
-	" FIXME these don't work....  how...?
-	menu Edit.Wrap-off :set nowrap <CR> :set guioptions+=b<CR>
-	menu Edit.Wrap-on  :set   wrap <CR> :set guioptions-=b<CR>
+	menu Edit.Disable-Word-Wrap :set nowrap <CR> :set guioptions+=b<CR>
+	menu Edit.Enable-Word-Wrap  :set   wrap <CR> :set guioptions-=b<CR>
 
 	" combining on one line (like +=gbr) doesn't work for all vim versions
 	" g)reyed_menu_item b)ottom_scollbar r)ight_scrollbar
@@ -242,4 +245,4 @@ unlet tmp_var
 " TODO Things to look up:
 " copyindent & preserveindent
 
-" vim:ts=4:sts=4
+" vim:ts=4

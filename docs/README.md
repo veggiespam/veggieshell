@@ -8,7 +8,8 @@ you have additions, suggestions or comments, send me a message.
 This environment is meant for the coder/admin to get up quickly, whether
 running on Irix, Apollo, or something more modern.  It isn't meant to
 be L33T, just good enough.  Ideally, you copy and use for your own purposes.
-Alternatively, simply git clone veggieshell on your newly accessed OS.  
+Alternatively, simply `git clone veggieshell` on a new machine and 
+`git pull` updates which contain any enhancements or bug fixes.
 We try to be consistent, so if you update the files, it will still run.
 
 
@@ -98,9 +99,8 @@ directly.
 **What have you tested this on?
 **
 > 
-> The same config works on RedHat 6.2, RedHat 7.1, Solaris 7, 
-> Solaris 8, and Mac OS X. I'm sure it will work elsewhere, but test
-> first.
+> The same config works on RedHat 6.2, RedHat 7.1, Solaris 7, Solaris 8,
+> Debian, and Mac OS X. I'm sure it will work elsewhere, but test first.
 > 
 
 **Do I have to use bash?
@@ -116,11 +116,9 @@ directly.
 **This does not work on bash version x.yy.
 **
 > 
-> I have run this on bash 2.03, 2.04, and 2.05 - each has new
-> features. The completion file has many munges for the point levels of
-> bash. Please tell me if a munge is wrong for your particular version of
-> bash. And someone please shoot the bash people for adding letters to
-> the versioning 2.03, 2.03a, 2.05b? A parsing nightmare.
+> Bash 2.03, 2.04, 2.05 contaned new features for each point level and the
+> completion files are just ignored to avoid the many munges.  When running on
+> bash 3.x, less munging is needed and Veggieshell works fine.
 > 
 
 ****
@@ -140,7 +138,7 @@ directly.
 > light graphical overhead on the system and a visual environment that does not
 > clutter the screen. Thus, we need a small and concise twm file. I appear to
 > have lost my minimalist-but-pretty version, so if anyone can contribute, it
-> would be useful.
+> would be useful.  This would be especially useful on OS X when running X apps.
 > 
 
 **a parallel cvs binary tree
@@ -152,15 +150,4 @@ directly.
 > within the toolkit is needed. 
 > 
 
-**twmrc
-**
-> GNU dir_colors has obsoleted the ".ext" sequence and recommends "*ext"
-> for the future.  Should we also upgrade and support this?  Is it worth the
-> risk of breaking old machines?
-
-****
-> 
->
-
-<!-- vim:syntax=md
--->
+vim:ts=4:syntax=markdown

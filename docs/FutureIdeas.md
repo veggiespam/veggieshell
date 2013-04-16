@@ -11,4 +11,4 @@ Create a global .gitignore file.  Suggestions:
 
 
 
-vim:ts=4:sts=4
+vim:ts=4:syntax=markdown

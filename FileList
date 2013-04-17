@@ -1,4 +1,5 @@
-# vim:ts=25:sts=25
+# vim:ts=25
+# 
 # This is a list of files which need to be symlinked into
 # the home directory.  There can be *NO* blank lines in this file.
 # 
@@ -8,6 +9,7 @@
 .bash_logout	shells/bash_logout
 .bash_login	shells/bash_login
 .bashrc	shells/bashrc
+.gitignore	utils/gitignore
 .inputrc	utils/inputrc
 .lesskey	utils/lesskey
 .screenrc	utils/screenrc

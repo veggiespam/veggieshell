@@ -1,2 +1,6 @@
+# OSX Directory Metadata
 .DS_Store
-.*.swp
+
+# swap and backup files
+.swp
+*.swp

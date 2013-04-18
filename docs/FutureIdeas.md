@@ -6,6 +6,13 @@ as change registry entries or set OS X gui defaults.  A really complex
 example of this can be found here: http://mths.be/osx  (aka https://github.com/mathiasbynens/dotfiles/blob/master/.osx ).
 
 
+## Better Docs
+The personalization docs could use some help.  Heck, linking with
+../README.md would be beneficial too.  A description of
+shell/boot, shell/aliases, shell/completion could be benificial
+too.
+
+
 ## Twmrc for X-Windows
 Long ago, twm was king. Then, everything from Window Maker to CDE to
 Enlightenment to whatever.  All of these new programs work well and make for

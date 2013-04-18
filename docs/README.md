@@ -79,6 +79,15 @@ Some configuration options include:
 More customization information is shown in the documentation in the
 personal directory.
 
+## Versioning and Braches
+
+The older versions of Veggieshell are found on the private
+Subversion repository.  The git version can be found on github,
+but it is in beta form.  Once v3.0 is finalized, it will be
+branched into stable and experimental braches - be sure to check
+out the stable ones for production systems.
+
+
 ## FAQ 
 
 ### Why symlinks?

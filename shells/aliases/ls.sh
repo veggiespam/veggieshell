@@ -13,7 +13,7 @@ if [ "$VEGGIE_ARCH" = "osx" ]; then
 	# enhancements.  To set the colors, see 'man ls' on
 	# plain-raw OS X and set the environment var here.
 	# The chosen colors could use refinement, but they are close
-	# to matching the dircolors configuation above.
+	# to matching the GNU dircolors configuation above.
 	export LSCOLORS=GxgxfxDxcxDxDxDbDbDbDb
 	alias ls='ls -G'
 
@@ -29,6 +29,7 @@ fi
 
 
 # test for GNU ls on the path, and set dir colors
+# some systems use gls instead of ls.  OS X brew is one such example.
 ls --version random_string_4231784713289fdjsklfjlsaFDSAFASD > $veggieboot_lsfile.ls 2>&1
 gls --version random_string_4231784713289fdjsklfjlsaFDSAFASD > $veggieboot_lsfile.gls 2>&1
 
@@ -63,7 +64,7 @@ if [ ! -z "$veggieboot_ls" -o ! -z "$veggieboot_gls" ]; then
 	alias l='ls -hsF'
 fi
 
-if [ -z "$veggieboot_ls" -a -z "$veggieboot_gls" -a  "$VEGGIE_ARCH" = "osx" ]; then
+if [ -z "$veggieboot_ls" -a -z "$veggieboot_gls" -a  "$VEGGIE_ARCH" != "osx" ]; then
 	# we're not using osx and don't have gnu ls, so the defaults
 	# -h not supported on sys V
 	alias d='ls -Flo'
@@ -73,10 +74,10 @@ fi
 
 # special glob in this alias only works in bash
 if [ ! -z "$BASH_VERSION" ]; then
-	alias l.='ll -FAd . .?* '
+	alias l.='ll -d . .?* '
 fi
 
 rm $veggieboot_lsfile.ls $veggieboot_lsfile.gls
 unset veggieboot_ls veggieboot_gls veggieboot_lsfile veggieboot_dc veggieboot_gdc
 
-# vim:ts=4
+# vim:ts=4:sw=4

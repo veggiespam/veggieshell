@@ -4,8 +4,11 @@
 # to only run it once.  It will restart some Applications for the
 # changes to occur.
 
+#  --  A new website called http://www.defaults-write.com/ has some great stuff
+
 # Disable animations from OS X Mail (10.8+)
 #    http://osxdaily.com/2011/07/27/disable-mail-animations-in-mac-os-x-lion/
+#  ** Reply appears broken in 10.9...
 defaults write com.apple.mail DisableSendAnimations -bool YES
 defaults write com.apple.mail DisableReplyAnimations -bool YES
 
@@ -23,6 +26,9 @@ defaults write com.apple.appstore ShowDebugMenu -bool true
 #    http://apple.stackexchange.com/questions/58889/how-do-i-enable-the-debug-menu-in-calendar
 defaults write com.apple.iCal IncludeDebugMenu 1
 
+# Enable debug menu in AddressBook (10.5+)
+defaults write com.apple.AddressBook ABShowDebugMenu 1
+
 # Enable debug menu in Safari (10.4+)
 #    http://osxdaily.com/2011/11/07/safari-debug-menu/
 defaults write com.apple.Safari IncludeInternalDebugMenu 1
@@ -37,6 +43,9 @@ defaults write com.apple.screencapture disable-shadow -bool true
 defaults write NSGlobalDomain NSUseLeopardWindowValues NO
 defaults write com.apple.Safari NSUseLeopardWindowValues YES
 
+# Make screen saver password non-instant, give me 10 sec to move mouse
+#    http://www.defaults-write.com/change-defaulft-screensaver-password-delay-options/
+defaults -currentHost write com.apple.screensaver askForPasswordDelay -int 10
 
 killall Dock
 

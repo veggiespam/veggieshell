@@ -1,10 +1,8 @@
 # Future Thoughts and Ideas
 
-## Single Run Config Scripts
-Consider a single-run boot strap script to configure new systems, such
-as change registry entries or set OS X gui defaults.  A really complex
-example of this can be found here: http://mths.be/osx  (aka https://github.com/mathiasbynens/dotfiles/blob/master/.osx ).
-
+## Single Run Config Scripts for more OS
+There are single-run configuration settings for OS X, but we
+need them for Linux and Cygwin too.
 
 ## Better Docs
 The personalization docs could use some help.  Heck, linking with

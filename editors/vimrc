@@ -168,6 +168,7 @@ endif " end if 0 terminal color stuff
 
 if has("gui_running")
 
+	" Set our fonts per system.
 	if has("gui_gtk2")
 		set guifont=Luxi\ Mono\ 12
 	elseif has("x11")
@@ -182,6 +183,11 @@ if has("gui_running")
 	endif
 
 
+	if has("gui_macvim")
+		source $VEGGIE_HOME/editors/fakeclip.vim
+	endif 
+
+
 	" black on white sucks, so change the colour to something fancy
 	highlight Normal guibg=black guifg=grey90
 
@@ -192,13 +198,18 @@ if has("gui_running")
 	menu Edit.Disable-Word-Wrap :set nowrap <CR> :set guioptions+=b<CR>
 	menu Edit.Enable-Word-Wrap  :set   wrap <CR> :set guioptions-=b<CR>
 
+	menu Edit.Line-Numbers-On  <CR> :set   number<CR>
+	menu Edit.Line-Numbers-Off <CR> :set nonumber<CR>
+
 	" combining on one line (like +=gbr) doesn't work for all vim versions
-	" g)reyed_menu_item b)ottom_scollbar r)ight_scrollbar
+	" g)reyed_menu_item b)ottom_scollbar r)ight_scrollbar i)con_for_X11
 	set guioptions+=g
 	set guioptions+=b
 	set guioptions+=r
-	" T)oolbar_is_useless t)earoff_menus_are_useless l)eft_scrollbar 
+	set guioptions+=i
+	" T)oolbar_is_useless t)earoff_menus_are_useless l&L)eft_scrollbar 
 	set guioptions-=l
+	set guioptions-=L
 	set guioptions-=t
 	set guioptions-=T
 	" a&A copy the selection to the system clipboard

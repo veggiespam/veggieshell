@@ -9,7 +9,7 @@ quickly getting new machines running.  Veggieshell supports
 remote software updates of the dot-files for bug fixes or feature
 enhancements.  Veggieshell has evolved over many years, adding
 support for newer versions of common Unix utilities, while still
-maintaiing compatability with older machines. 
+maintaining compatability with older machines. 
 
 ## Philosophy
 
@@ -39,7 +39,7 @@ $HOME/.veggieshell.
     `git clone https://github.com/veggiespam/veggieshell`.
 *   Copy the veggieshell dir into your $HOME dir and rename it to be
     .veggieshell - you will still be able to perform git operations on 
-	it with the new name.
+	the directory with the new dot-veggieshell name.
 *   The file $VEGGIE\_HOME/FileList contains a list of dot files
     that will be created
     in your home dir.  If your home dir currently has any of these files, 
@@ -67,7 +67,7 @@ Some configuration options include:
 
 *   $VEGGIE\_HOME/personal/shells/hosts/$hostname-bashrc - yet more fine grained
     control over variable on a per hostname basis.
-*   $VEGGIE\_HOME/personal/shells/completions/* - this sets or overrides
+*   $VEGGIE\_HOME/personal/shells/completions/ *  - this sets or overrides
     bash completions that you may wish to use.
 *   $VEGGIE\_HOME/personal/shells/hosts/$hostname-alias - more completions for
     this specific host.
@@ -82,9 +82,9 @@ personal directory.
 ## Versioning and Braches
 
 The older versions of Veggieshell are found on the private
-Subversion repository.  The git version can be found on github,
-but it is in beta form.  Once v3.0 is finalized, it will be
-branched into stable and experimental braches - be sure to check
+Subversion repository and Github hosts the latest software..
+At some point, v3.0 will be branched into stable
+and experimental trees - be sure to check
 out the stable ones for production systems.
 
 
@@ -118,7 +118,7 @@ older versions of various OSes many also need testing.
 ### Do I have to use bash?
 
 No; you can (probably) use any Bourne derivative shell, including
-ksh, zsh, and sh.  I'm interested in hearing what minor tweaks may
+ksh, zsh, busybox, and sh.  I'm interested in hearing what minor tweaks may
 be needed for other shells.  What this does not work with is csh
 and tcsh - and no support for them will be forthcoming, nor will
 Veggieshell work with AdventureShell.
@@ -137,7 +137,7 @@ Veggieshell works fine.  No features of bash 4.x are used.
 The complete Bash-Completion project archive is 20MB;
 Veggieshell is only 1MB.  Our goal "good enough", not "kitchen
 sink".  Per the FAQ, Bash-Completion assumes you're running Bash
-4.1 or newer; most people are not.  If you want more completions,
+v4.1 or newer; most people are not.  If you want more completions,
 add to your personal dir.  We may, however, use some of their
 files where noted if they work with older bash versions.
 

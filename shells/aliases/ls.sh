@@ -4,7 +4,7 @@
 #
 # These aliases are set: plain "ls" with color options   and   l   l.  ll   d
 
-veggieboot_lsfile=$TMPDIR/veggieboot_ls_$$
+veggieboot_lsfile=/tmp/veggieboot_ls_$$
 
 if [ "$VEGGIE_ARCH" = "osx" ]; then
 	# We test OSX first, since we may wish to override with GNU ls settings.

@@ -9,21 +9,22 @@ earlier files 00-file.sh -- 99-file.sh).
 ## Description of some files
 
 * ls - Figure out if we're running GNU ls, Mac ls, or SysV ls.  Then,
-	 set colors along with a bunch of aliases.  These are:
+       set colors along with a bunch of aliases.  These additional
+       aliases are:
+** ls - plain ls with color.  Sets GNU ls if around, otherwise,
+        normal ls.  Color is both BSD and GNU colors.
+** d - show directory listing with mods, date, size.  Basically,
+       nicer ls -l
+** l -  narrow ls with sizes.
+** ll - narrow ls with all files, dotfiles, and sizes.
+** l. - narrow ls with sizes, but only showing dotfiles.  Only on bash.
 
-	 ** ls - plain ls with color.  Sets GNU ls if around, otherwise,
-		normal ls.
-	** d - show directory listing with mods, date, size.  Basically,
-	nicer ls -l
-	** ll - 
-	** l. -
-	** l - 
-
-* arch-cygwin - cygwin specific munges.  This is a no-op on non-Cygwin.
+* arch-cygwin - cygwin specific munges.  This is a no-op on non-Cygwin.  No
+  longer works very well.
 
 * mail - functions for quickly mailing stuff.  This function needs updating for 
 	the modern mail age of mime and other mailers.  Modern mailers cannot read 
 	uuencoding.
 
 
-vim:ts=4
+vim: ts=4 sw=4 et filetype=markdown

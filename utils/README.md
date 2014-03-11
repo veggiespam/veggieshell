@@ -13,7 +13,9 @@ This directory contains init files for various programs.
   dir.
 
 * screenrc is the configuration file for screen.
-Future thoughts:
+
+## Future Thoughts
+
 * dircolors - implement files named like dircolors-$TERM to show linux
   console and xterm specific colors and such.
 * inputrc - Document the changes.

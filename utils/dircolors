@@ -158,6 +158,8 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 # documents (light green)
 *.html	00;32
 *.htm	00;32
+*.md	00;32	# Markdown
+*.markdown	00;32	# Markdown
 *.dtd	00;32
 *.txt	00;32
 *.xml	00;32
@@ -183,8 +185,10 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.mov	01;36
 *.mp3	01;36
 *.mp4	01;36
-*.m4v	01;36
+*.m4a	01;36
 *.m4p	01;36
+*.m4v	01;36
+*.mkv	01;36
 *.dv	01;36	# raw DV from camcorder
 *.avi	01;36
 *.wmv	01;36
@@ -215,6 +219,7 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.php	01;33
 *.inc	01;33	# common in perl and php and jsp
 *.asp	01;33
+*.aspx	01;33
 # DEAD
 #.cxx	01;33	# just say no to using it!
 #.c++	01;33	# my filesystem supports that char and yours doesn't
@@ -224,9 +229,9 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *akefile	01;37	# Makefile, GNUmakefile, makefile
 *.mk	01;37	# makefile
 *.xcode	01;37	# Xcode / Project Builder (let's phase out the later)
-*.pbproj	01;37	# Xcode / Project Builder
 # DEAD
 #.jpx	01;37	# jbuilder project file
+#*.pbproj	01;37	# Xcode / Project Builder
 
 # config files
 *.conf	00;36
@@ -235,6 +240,7 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.asa	00;36	# Asp.net config
 *rc	00;36
 *.ht*	00;36	# apache files, .htaccess .htpasswd
+*.css	00;36	# CSS files for HTML - want different color
 
 # external links or pointers
 # TODO need a new colour!

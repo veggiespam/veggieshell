@@ -93,6 +93,10 @@ out the stable ones for production systems.
 *   The [semi-wonderful FAQ](docs/FAQ.md)
 *   Random [Future Ideas](docs/FutureIdeas.md)
 *   Legal [License](docs/LICENSE.txt) Docs
-
+*   The [Run-Once](run-once/README.md) folder is manually run
+*   Shell readme for [aliases](shells/aliases/README.md)
+*   Veggieshell's [bootup/login](shells/boot/README.md) process
+*   Bash [completions](shells/completions/README.md)
+*   General [utils](utils/README.md) readme
 
 vim: ts=4 sw=4 et filetype=markdown

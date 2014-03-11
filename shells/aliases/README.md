@@ -11,13 +11,13 @@ earlier files 00-file.sh -- 99-file.sh).
 * ls - Figure out if we're running GNU ls, Mac ls, or SysV ls.  Then,
        set colors along with a bunch of aliases.  These additional
        aliases are:
-** ls - plain ls with color.  Sets GNU ls if around, otherwise,
+ + ls - plain ls with color.  Sets GNU ls if around, otherwise,
         normal ls.  Color is both BSD and GNU colors.
-** d - show directory listing with mods, date, size.  Basically,
+ + d - show directory listing with mods, date, size.  Basically,
        nicer ls -l
-** l -  narrow ls with sizes.
-** ll - narrow ls with all files, dotfiles, and sizes.
-** l. - narrow ls with sizes, but only showing dotfiles.  Only on bash.
+ + l -  narrow ls with sizes.
+ + ll - narrow ls with all files, dotfiles, and sizes.
+ + l. - narrow ls with sizes, but only showing dotfiles.  Only on bash.
 
 * arch-cygwin - cygwin specific munges.  This is a no-op on non-Cygwin.  No
   longer works very well.

@@ -9,12 +9,13 @@ earlier files 00-file.sh -- 99-file.sh).
 ## Description of some files
 
 * ls - Figure out if we're running GNU ls, Mac ls, or SysV ls.  Then,
-       set colors along with a bunch of aliases.  These additional
-       aliases are:
- + `ls` - plain ls with color.  Sets GNU ls if around, otherwise,
-        normal ls.  Color is both BSD and GNU colors.
- + `d` - show directory listing with mods, date, size.  Basically,
-       nicer ls -l
+       set colors along with a bunch of aliases.  Readable numbers
+       are used, like "337K" instead of "344822", for the file
+       sizes.  Figures out GNU versus BSD coloring options.  These
+       additional aliases are:
+ + `ls` - plain ls, just with color.
+ + `d` - think "dir", shows directory listing with mods,
+          date, size.  Basically, nicer ls -l  .
  + `l` -  narrow ls with sizes.
  + `ll` - narrow ls with all files, dotfiles, and sizes.
  + `l.` - narrow ls with sizes, but only showing dotfiles.  Only on bash.

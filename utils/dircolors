@@ -93,7 +93,8 @@ SETGID	30;43	# file that is setgid (g+s)
 MISSING	01;05;37;41 # ... and the files they point to
 CAPABILITY 30;41	# file with capability
 EXEC	01;32	# This is for files with execute permission [ie, 700...]
-MULTIHARDLINK 00;42	# regular file with more than one link
+# MultiHardLink doesn't work on all versions of gnu ls... generates error
+#MULTIHARDLINK 00;42	# regular file with more than one link
 STICKY_OTHER_WRITABLE 30;42 # dir that is sticky and other-writable (+t,o+w)
 OTHER_WRITABLE 34;42 # dir that is other-writable (o+w) and not sticky
 STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable

@@ -22,4 +22,6 @@ cat "$VEGGIE_HOME/FileList" | \
 . $tmpfile
 
 rm -f $tmpfile
+unset tmpfile
+
 # vi:ts=4:sts=4

@@ -22,11 +22,6 @@ fi
 export EDITOR="$VISUAL"
 export FCEDIT="$VISUAL"
 
-# use BSD ps
-if [ -e /usr/ucb/ps ]; then
-	alias ps='/usr/ucb/ps'
-fi
-
 # printers....
 alias lp='lp -o nobanner'
 alias lpr='lpr -h'
@@ -36,7 +31,13 @@ res=$?
 if [ $res = 0 ]; then
     alias enscript='enscript --landscape -columns=2 --fancy-header \
         --line-numbers --tabsize=4 -DDuplex:true'
+fi
 
+type pandoc > /dev/null 2> /dev/null
+res=$?
+if [ $res = 0 ]; then
+    function __panhtml() { pandoc $@ | sed 's/&quot;/"/g; s/<ol style="list-style-type: decimal">/<ol>/g;' ;}
+	alias panhtml=__panhtml
 fi
 
 unset res

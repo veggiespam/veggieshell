@@ -111,6 +111,7 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.app	01;32	# mac binaries; DIR color may override
 # DEAD
 #.csh	01;32
+#.tcsh	01;32
 
 # archives or compressed (bright red)
 *.tar	01;31
@@ -122,6 +123,7 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.bz2	01;31
 *.rpm	01;31
 *.deb	01;31
+*.pkg	01;31
 *.cab	01;31
 *.rar	01;31
 *.dmg	01;31
@@ -177,6 +179,7 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.ps	00;32	# Postscript
 *.psd	00;32	# Photoshop doc
 *.ai	00;32	# Adobe Illustrator
+# TODO: latex
 # DEAD
 #.sgml	00;32	# yes, I said dead.
 
@@ -195,7 +198,8 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.wmv	01;36
 *.wav	01;36
 *.cda	01;36	# raw audio cd music
-*.ogg	01;36
+*.oga	01;36
+*.ogv	01;36
 *.aac	01;36	# is this used anymore?
 # DEAD
 #.fli	01;36
@@ -229,10 +233,10 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 # coding helpers
 *akefile	01;37	# Makefile, GNUmakefile, makefile
 *.mk	01;37	# makefile
-*.xcode	01;37	# Xcode / Project Builder (let's phase out the later)
+*.xcode	01;37	# Xcode
 # DEAD
 #.jpx	01;37	# jbuilder project file
-#*.pbproj	01;37	# Xcode / Project Builder
+#*.pbproj	01;37	# Xcode / Project Builder (old name)
 
 # config files
 *.conf	00;36
@@ -240,6 +244,8 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.ini	00;36
 *.asa	00;36	# Asp.net config
 *rc	00;36
+*.mf	00;36	# java/jar manifest
+*.MF	00;36	# java/jar manifest
 *.ht*	00;36	# apache files, .htaccess .htpasswd
 *.css	00;36	# CSS files for HTML - want different color
 
@@ -248,6 +254,6 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.torrent	01;37
 *.url	01;37
 *.lnk	01;37
-
+*.webloc	01;37
 
 # vi:ts=11:sts=11:tw=70

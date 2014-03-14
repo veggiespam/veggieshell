@@ -43,8 +43,7 @@ fi
 # of course, that doesn't work on cygwin.  Ugh!
 #
 function spacecolon () {
-  unset spacecolonret
-  spacecolonret=$1
+    local spacecolonret=$1
   shift
   for i in $*; do
 #    if [ -e "$i" ]; then 
@@ -59,7 +58,7 @@ function spacecolon () {
 # for MANPATH, LD_LIB_PATH, CLASSPATH, etc.  Question: does ${! work
 # on non-bash shells?
 function post_path () {
-	pathname=$1
+    local pathname=$1
 	shift
 	if [ -z "${!pathname}" ]; then
 		eval $pathname=`spacecolon $*`
@@ -69,11 +68,10 @@ function post_path () {
 		eval "$pathname=\"${!pathname}:`spacecolon $*`\""
 	fi
 	export $pathname
-	unset pathname
 }
 
 function pre_path () {
-	pathname=$1
+    local pathname=$1
 	shift
 	if [ -z "${!pathname}" ]; then
 		eval $pathname=`spacecolon $*`
@@ -83,7 +81,6 @@ function pre_path () {
 		eval "$pathname=\"`spacecolon $*`:${!pathname}\""
 	fi
 	export $pathname
-	unset pathname
 }
 
 alias LD=preLD
@@ -179,4 +176,4 @@ function preMAN () {
   export MANPATH
 }
 
-# vim:ts=4
+# vim:ts=4:et:sw=4:syntax=sh

@@ -43,7 +43,9 @@ export VEGGIE_ARCHVER
 # OS X has different versions, so let's convert to Apple's versions
 # We can use the built-in $OSTYPE variable since it will be defined.
 if [ "$VEGGIE_ARCH" = "osx" ]; then
-	if [ "$OSTYPE" = "darwin12" ]; then 
+    if [ "$OSTYPE" = "darwin13" ]; then 
+        VEGGIE_ARCHVER="10.9" ;				# Mavericks
+    elif [ "$OSTYPE" = "darwin12" ]; then 
 		VEGGIE_ARCHVER="10.8" ;				# Mountain Lion
 	elif [ "$OSTYPE" = "darwin11" ]; then 
 		VEGGIE_ARCHVER="10.7" ;				# Lion
@@ -59,4 +61,4 @@ if [ "$VEGGIE_ARCH" = "osx" ]; then
 	fi
 fi
 
-# vim:ts=4
+# vim:ts=4:et:sw=4:syntax=sh

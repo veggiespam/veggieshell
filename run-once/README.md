@@ -1,7 +1,9 @@
 # Run-Once
 
 Items in this folder can optionally be run for additional system or account
-configuration.  These only need to be done once.
+configuration.  These only need to be done once.  Except on the
+rare occation when things get updated, but that doesn't happen
+very often.
 
 ## OS X
 
@@ -18,4 +20,4 @@ configuration.  These only need to be done once.
 * Nothing here yet.
 
 
-vim: ts=4 sw=4 et filetype=markdown
+vim: ts=4 sw=4 tw=65 et filetype=markdown

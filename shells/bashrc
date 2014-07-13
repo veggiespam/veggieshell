@@ -1,4 +1,4 @@
-# vim:ts=4:syntax=sh
+# Veggieshell bashrc
 
 #echo bashrc
 # if we've already run bashrc, don't do it again!	see veggieres alias below.
@@ -11,7 +11,7 @@ export VEGGIE_HOME
 
 # first, source system stuff, it's sometimes useful
 if [ -e /etc/bashrc ]; then
-	. /etc/bashrc
+    . /etc/bashrc
 fi
 
 # set this now, so that prePATH and such work on rsh and non-interactive shells
@@ -35,7 +35,7 @@ if [ -z "$MANPATH" ]; then
 	done
 fi
 
-# save the original path.	the res alias will re-read the bashrc.	but,
+# save the original path. the veggieres alias will re-read the bashrc.  but,
 # the path can get expanded to huge lengths causing errors, so save orig!
 veggie_originalpath="$PATH"
 veggie_originalmanpath="$MANPATH"
@@ -71,7 +71,7 @@ elif [ "$VEGGIE_ARCH" = "osx" ]; then
 	if [ -d "/sw/bin" ]; then
 		# fink
 		prePATH /sw/bin	
-		. /sw/bin/init.sh
+        source /sw/bin/init.sh
 	fi
 	if [ -d "/opt/local/bin" ]; then
 		# DarwinPorts or MacPorts
@@ -141,6 +141,7 @@ command_oriented_history=1
 #   1.	Personal bashrc
 #	2.	Host-specific bashrc
 #	3.	Veggieshell aliases and functions in shells/aliases/*.sh
+#   3½  Items related to command line GUI interaction shells/cmdgui/*.sh
 #	4.	Personal aliases
 #	5.	Host-specific aliases
 #
@@ -149,6 +150,7 @@ for i in \
 		$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-bashrc \
 		\
 		$VEGGIE_HOME/shells/aliases/*.sh \
+        $VEGGIE_HOME/shells/cmdgui/*.sh \
 		$VEGGIE_HOME/personal/shells/aliases/*.sh \
 		$VEGGIE_HOME/personal/shells/hosts/$veggie_hostname-aliases \
 	; do
@@ -179,3 +181,4 @@ if [ \( ${BASH_VERSINFO[0]}  -gt 2 \) -o		\
 	done
 fi
 
+# vim:ts=4:et:sw=4:syntax=sh

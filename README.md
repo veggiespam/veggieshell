@@ -17,12 +17,12 @@ Veggieshell is meant for the coder/admin to get up quickly, whether
 running on Irix, Apollo, or something more modern.  It isn't meant to
 be L33T, just good enough.  Veggieshell supports two methods of
 installation: linked with the repository (e.g., github) or copied
-and unlinked.
+& unlinked.
 
 Via the linked methond, `git clone veggieshell` on a new
 account/machine and `git pull` updates for enhancements or bug
 fixes.  The system can be customized to a small degree without
-editing any of the master files, so updates to veggieshell won't
+editing any of the master files, so updates to veggieshell from any remote repository won't
 wipe out any personization. 
 
 Veggieshell is meant to run on many systems with different

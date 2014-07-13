@@ -1,16 +1,17 @@
 
 # run tail -f on a file in a new window
 function xtail () {
-	file=$1
-	$veggie_term -fn 6x13 -geometry 80x40 -bg LightSeaGreen -fg Black \
-		-name "tailing $file" -title "tailing $file" -e tail -f $file &
+	local file=$1
+	newwin -g eval "cd `pwd` ; tail -f $file"
+	#$veggie_term -fn 6x13 -geometry 80x40 -bg LightSeaGreen -fg Black \
+		#-name "tailing $file" -title "tailing $file" -e tail -f $file &
 }
 
 # 
 # changes the title of an xterm or OS X Terminal Window
 #
 function xtitle () {
-	MESG="$*"
+	local MESG="$*"
 
 	# warning, the next line contains escape chars.
 	# ^[]1;STRING^G does icon, 2 does title bar
@@ -23,6 +24,14 @@ function xtitle () {
 	#echo -e "\033]2;${MESG}\007"
 	#echo -e "\033]1;${MESG}\007"
 
+	# we could do this... but we don't.  if you're ssh'd into a
+	# remote mac, this runs there.  so, probably overkill for
+	# this as the xterm escape sequence still works.
+	#if [ $VEGGIE_ARCH = osx ]; then
+	#	osascript -e "tell application \"Terminal\" to set current settings of custom title to $MESG"
+	#fi
+
+
 	# now, disable any automatic title bar replacements like in
 	# redhat as the point of xtitle is to keep the same title.
 	unset PROMPT_COMMAND
@@ -32,13 +41,8 @@ function xtitle () {
 # changes the title of an xterm with the same name over and over.
 #
 function ytitle () {
-	MESG="$*"
-	xtitle $MESG $MESG $MESG $MESG $MESG $MESG $MESG $MESG
+	local MESG="$*"
+	xtitle $MESG $MESG $MESG $MESG $MESG $MESG $MESG
 }
 
-#
-# set display to current machine
-#
-alias d0='export DISPLAY=:0'
-
-# vim:ts=4
+# vim ts=4 syntax=bash

@@ -14,11 +14,19 @@ earlier files 00-file.sh -- 99-file.sh).
        sizes.  Figures out GNU versus BSD coloring options.  These
        additional aliases are:
  + `ls` - plain ls, just with color.
- + `d` - think "dir", shows directory listing with mods,
+ + `d`  - think "dir", shows directory listing with mods,
           date, size.  Basically, nicer ls -l  .
- + `l` -  narrow ls with sizes.
+ + `l`  - narrow ls with sizes.
  + `ll` - narrow ls with all files, dotfiles, and sizes.
  + `l.` - narrow ls with sizes, but only showing dotfiles.  Only on bash.
+
+* other-programs.sh - random other aliases and functions.
+
+ + panhtml - pandoc with easy extra filters, great for quick docs
+             that get included in other HTML files.  This replaces
+             `&quot;` &rarr; "   `<ol style="..." >` &rarr; `<ol>` 
+ + encrypt - makes a really fancy set of settings, great for code printing.
+ + more...
 
 * arch-cygwin - cygwin specific munges.  This is a no-op on non-Cygwin.  No
   longer works very well.

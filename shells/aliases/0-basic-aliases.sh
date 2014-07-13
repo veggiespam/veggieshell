@@ -28,4 +28,7 @@ alias cols='stty cols $1'
 # Read raw nroff file in man style
 alias roff='nroff -man $* | $PAGER'
 
+# Remove all OSX .DS_Store files in a tree
+alias DSrm='find . -name .DS_Store -exec rm \{\} \;'
+
 # vim:ts=4

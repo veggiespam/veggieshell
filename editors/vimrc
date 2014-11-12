@@ -38,7 +38,7 @@ map!  
 
 syntax on
 " Some versions of vim have Module-2 mapped to *.md - override
-au BufRead,BufNewFile *.md setfiletype markdown
+au BufRead,BufNewFile *.md set filetype markdown
 
 " programming options
 set autoindent		" indent to previous line's indention

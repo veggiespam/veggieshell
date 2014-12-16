@@ -37,6 +37,7 @@ type pandoc > /dev/null 2> /dev/null
 res=$?
 if [ $res = 0 ]; then
     function __panhtml() { pandoc $@ | sed 's/&quot;/"/g; s/<ol style="list-style-type: decimal">/<ol>/g;' ;}
+#    function __panhtml() { pandoc $@ | sed 's/&quot;/"/g; s/<ol style="list-style-type: decimal">/<ol>/g; s/<\/ol>/<\/ol>\\n/g' ;}
 	alias panhtml=__panhtml
 fi
 

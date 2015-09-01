@@ -43,7 +43,9 @@ export VEGGIE_ARCHVER
 # OS X has different versions, so let's convert to Apple's versions
 # We can use the built-in $OSTYPE variable since it will be defined.
 if [ "$VEGGIE_ARCH" = "osx" ]; then
-    if [ "$OSTYPE" = "darwin14" ]; then 
+    if [ "$OSTYPE" = "darwin15" ]; then 
+        VEGGIE_ARCHVER="10.11" ;                # El Capitan
+    elif [ "$OSTYPE" = "darwin14" ]; then 
         VEGGIE_ARCHVER="10.10" ;                # Yosemite
     elif [ "$OSTYPE" = "darwin13" ]; then 
         VEGGIE_ARCHVER="10.09" ;				# Mavericks

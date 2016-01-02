@@ -213,6 +213,7 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.c	01;33	# C
 *.m	01;33	# Objective-C
 *.mm	01;33	# Objective-C & C++ in same file
+*.swift	01;33
 *.cpp	01;33	# C++
 *.cs	01;33	# C-apartment-number-symbol
 *.h	01;33	# C and sibling include

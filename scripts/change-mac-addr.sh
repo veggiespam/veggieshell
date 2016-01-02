@@ -3,6 +3,7 @@
 #
 
 if [ $VEGGIE_ARCH != osx ]; then
+    echo This script only runs on OSX; someone please port me.
     return
 fi
 
@@ -23,22 +24,23 @@ prefix="D4:BE:A9"
 suffix=`hexdump -n3 -e'/1 ":%02X"' /dev/random`
 new_addr="$prefix$suffix"
 
-echo    Will try to change to this: $new_addr
-echo -n Here is your current MAC  :
+echo    'Will try to change to this: ' $new_addr
+echo -n 'Here is your current MAC  : '
 ifconfig $eth_interface | grep ether
 
-echo -n Your current network is   :
+echo -n 'Your current network is   : '
 $airport_cmd -I | grep " SSID:"
 
-echo Shutting down wi-fi:
+echo Shutting down wi-fi...
 $airport_cmd -z
 
 echo Setting new MAC to $new_addr -- you must type root password
 sudo ifconfig $eth_interface ether $new_addr
 
-echo Done setting, running a verification check:
+echo    'New MAC set, running a current MAC'
+echo -n 'verification check        :'
 ifconfig $eth_interface | grep ether
 
-echo Done, now try associating to your new network.
+echo Done, make sure your new address matches and re-connect to wifi.
 
 # vim: sts=4:ts=4:sw=4:et

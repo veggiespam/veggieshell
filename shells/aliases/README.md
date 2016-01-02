@@ -25,7 +25,7 @@ earlier files 00-file.sh -- 99-file.sh).
  + panhtml - pandoc with easy extra filters, great for quick docs
              that get included in other HTML files.  This replaces
              `&quot;` &rarr; "   `<ol style="..." >` &rarr; `<ol>` 
- + encrypt - makes a really fancy set of settings, great for code printing.
+ + enscript - makes a really fancy set of settings, great for code printing.
  + more...
 
 * arch-cygwin - cygwin specific munges.  This is a no-op on non-Cygwin.  No

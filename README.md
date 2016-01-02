@@ -9,7 +9,7 @@ quickly getting new machines running.  Veggieshell supports
 remote software updates of the dot-files for bug fixes or feature
 enhancements.  Veggieshell has evolved over many years, adding
 support for newer versions of common Unix utilities, while still
-maintaining compatability with older machines. 
+maintaining compatibility with older machines. 
 
 ## Philosophy
 
@@ -19,15 +19,24 @@ be L33T, just good enough.  Veggieshell supports two methods of
 installation: linked with the repository (e.g., github) or copied
 & unlinked.
 
-Via the linked methond, `git clone veggieshell` on a new
+Via the linked method, `git clone veggieshell` on a new
 account/machine and `git pull` updates for enhancements or bug
 fixes.  The system can be customized to a small degree without
 editing any of the master files, so updates to veggieshell from any remote repository won't
-wipe out any personization. 
+wipe out any personalization. 
 
 Veggieshell is meant to run on many systems with different
 versions of bash, vim, etc.  As such, checks are made before
 version specific configuration is run.  
+
+## Supported Systems & Requirements
+
+Veggieshell runs on OS X 10.4 - 10.10, most modern Linux distros
+(including Ubuntu, Kedi, & Redhat), and has some support for Cygwin.
+There is a bit of bit-rot in Cygwin, so patches are welcome.
+Veggieshell only supports makes customizations to the Bash shell as no
+one has contributed other shells.  If a common tool used by you is
+does not have a basic configuration, plus contribute.
 
 ## Installation 
 
@@ -79,10 +88,10 @@ Some configuration options include:
 More customization information is shown in the documentation in the
 personal directory.
 
-## Versioning and Braches
+## Versioning and Branches
 
 The older versions of Veggieshell are found on the private
-Subversion repository and Github hosts the latest software..
+Subversion repository and GitHub hosts the latest software.
 At some point, v3.0 will be branched into stable
 and experimental trees - be sure to check
 out the stable ones for production systems.
@@ -99,4 +108,4 @@ out the stable ones for production systems.
 *   Bash [completions](shells/completions/README.md)
 *   General [utils](utils/README.md) readme
 
-vim: ts=4 sw=4 et filetype=markdown
+vim: ts=4 sw=4 et filetype=markdown spell

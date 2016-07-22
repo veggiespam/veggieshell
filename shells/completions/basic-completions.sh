@@ -238,7 +238,8 @@ _man ()
 complete -F _man man
 
 
-
+# This breaks in new versions.  You can't do openssl -in <filename> anymore.
+if [ 0 = 1 ]; then
 # openssl(1) completion
 _openssl ()
 {
@@ -257,4 +258,5 @@ _openssl ()
 	return 0
 }
 complete -F _openssl -o default openssl
+fi
 

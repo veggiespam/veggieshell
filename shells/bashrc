@@ -80,6 +80,16 @@ elif [ "$VEGGIE_ARCH" = "osx" ]; then
 	fi
 fi
 
+# set a bunch of common PATHs
+for i in \
+		$HOME/Applications/  \
+		$HOME/bin/  \
+	; do
+	if [ -d "$i" ]; then
+		postPATH "$i"
+	fi
+done
+
 
 # we are coders, we wants cores
 #ulimit -HSc unlimited

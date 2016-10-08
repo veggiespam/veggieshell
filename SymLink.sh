@@ -1,6 +1,6 @@
 #!/bin/sh
 
-tmpfile=veggieshell_installer_tmpfile_$$.sh
+tmpfile="$HOME/veggieshell_installer_tmpfile_$$.sh"
 cd "$HOME"
 VEGGIE_HOME="$HOME/.veggieshell"
 
@@ -17,11 +17,11 @@ mkdir -p Before-Veggieshell
 cat "$VEGGIE_HOME/FileList" | \
 	grep -v '^#' | \
 	awk '{printf "if [ -e \"%s\" ] ; then mv -f \"%s\" Before-Veggieshell \nfi \n ln -s \"$VEGGIE_HOME/%s\" \"%s\" ;  \n", $1, $1, $2, $1}' \
-	> $tmpfile
+	> "$tmpfile"
 
-. $tmpfile
+. "$tmpfile"
 
-rm -f $tmpfile
+rm -f "$tmpfile"
 unset tmpfile
 
 # vi:ts=4:sts=4

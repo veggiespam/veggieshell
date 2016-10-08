@@ -214,6 +214,7 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *.m	01;33	# Objective-C
 *.mm	01;33	# Objective-C & C++ in same file
 *.swift	01;33
+*.playground	01;33
 *.cpp	01;33	# C++
 *.cs	01;33	# C-apartment-number-symbol
 *.h	01;33	# C and sibling include
@@ -235,6 +236,9 @@ STICKY	37;44	# dir with the sticky bit set (+t) and not other-writable
 *akefile	01;37	# Makefile, GNUmakefile, makefile
 *.mk	01;37	# makefile
 *.xcode	01;37	# Xcode
+*.xcodeproj	01;37	# Xcode
+*.xcworkspace	01;37	# Xcode
+*.podspec	01;37	# Cocoapod
 # DEAD
 #.jpx	01;37	# jbuilder project file
 #*.pbproj	01;37	# Xcode / Project Builder (old name)

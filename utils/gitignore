@@ -2,5 +2,5 @@
 .DS_Store
 
 # swap and backup files
-.swp
+.*.swp
 *.swp

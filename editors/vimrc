@@ -81,6 +81,7 @@ nnoremap Q gq		"remap Q command like vim4.0: reformat text
 "does not work.... FIXME maybe
 vnoremap Q gq		"remap Q command like vim4.0: reformat text
 nmap :W :w			" how often to do you type :W and mean :w
+nmap :Wq :wq		" how often to do you type :Wq and mean :wq
 
 syntax on
 
@@ -180,6 +181,7 @@ if has("gui_running")
 	elseif has("gui_win32")
 		set guifont=Luxi_Mono:h12:cANSI
 	elseif has("gui_macvim")
+		" no longer supported, so ignored.
 		set guifont=DejaVu\ Sans\ Mono:h13
 		set guifont=Menlo\ Regular:h14
 	endif

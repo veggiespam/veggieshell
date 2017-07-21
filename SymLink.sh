@@ -23,9 +23,9 @@ mkdir -p Before-Veggieshell
 cat "$VEGGIE_HOME/FileList" | \
 	grep -v '^#' | \
 	awk '{printf "if [ -e \"%s\" -o -L \"%s\" ] ; then\n   mv -f \"%s\" Before-Veggieshell \nfi \n ln -s \"$VEGGIE_HOME/%s\" \"%s\" ;  \n", $1, $1, $1, $2, $1}' \
-	> ${tmpfile}"
+	> ${tmpfile}
 
-. ${HOME}/${tmpfile}
+. ${tmpfile}
 
 rm -f ${tmpfile}
 unset tmpfile

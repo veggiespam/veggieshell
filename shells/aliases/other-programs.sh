@@ -41,8 +41,9 @@ if [ $res = 0 ]; then
 
 	# "space RRR space" produces a right arrow in html
 
-    function __panhtml() { pandoc $@ | sed 's/&quot;/"/g; s/<ol style="list-style-type: decimal">/<ol>/g;  s/ RRR / \&rarr; /g' ;}
-#    function __panhtml() { pandoc $@ | sed 's/&quot;/"/g; s/<ol style="list-style-type: decimal">/<ol>/g; s/<\/ol>/<\/ol>\\n/g' ;}
+    #jfunction __panhtml() { pandoc -f markdown $* | sed 's/&quot;/"/g; s/<ol style="list-style-type: decimal">/<ol>/g;  s/ RRR / \&rarr; /g;   s/<\/p>/<\/p>\\r/g;    s/<\/ol>/<\/ol>\\r/g;    s/<\/ul>/<\/ul>\\r/g;   s/<\/pre>/<\/pre>\\r/g;' ;}
+    function __panhtml() { pandoc -f markdown $* | sed 's/&quot;/"/g; s/<ol style="list-style-type: decimal">/<ol>/g;  s/ RRR / \&rarr; /g;   s/<\/p>/<\/p>/g;    s/<\/ol>/<\/ol>/g;    s/<\/ul>/<\/ul>/g;   s/<\/pre>/<\/pre>/g;' ;}
+#    function __panhtml() { pandoc $@ | sed 's/&quot;/"/g; s/<ol style="list-style-type: decimal">/<ol>/g; s/<\/ol>/<\/ol>\n/g' ;}
 	alias panhtml=__panhtml
 fi
 
